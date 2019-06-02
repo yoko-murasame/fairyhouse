@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FairyCatDao extends JpaRepository<FairyCat,Integer> {
 
+    public FairyCat findByCatName(String name);
 }

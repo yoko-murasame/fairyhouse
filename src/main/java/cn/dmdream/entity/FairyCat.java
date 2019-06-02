@@ -1,14 +1,13 @@
 package cn.dmdream.entity;
 
 import lombok.Data;
-import lombok.Generated;
-import lombok.ToString;
 
 import javax.persistence.*;
 
 @Data
 //@ToString(exclude = {"admin"})
-@Entity(name = "tab_cat")
+@Entity
+@Table(name = "tab_cat")
 public class FairyCat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +16,6 @@ public class FairyCat {
     private String catName;
 
     //多的一方
-    @ManyToOne(targetEntity = FairyAdmin.class)
-    @JoinColumn(name = "fore_admin",referencedColumnName = "adminId")
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH},fetch = FetchType.EAGER)
     private FairyAdmin admin;
 }

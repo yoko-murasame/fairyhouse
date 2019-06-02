@@ -11,6 +11,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -48,9 +49,18 @@ public class JpaTest {
 
     @Test
     public void testDelete(){
-        FairyAdmin fairyAdmin = new FairyAdmin();
-        fairyAdmin.setAdminId(4);
-        fairyAdminDao.delete(fairyAdmin);
+        FairyAdmin admin = new FairyAdmin();
+        FairyCat cat = new FairyCat();
+        cat.setCatName("Tom2");
+        cat.setAdmin(admin);
+        FairyCat cat1 = new FairyCat();
+        cat1.setCatName("Miki2");
+        cat1.setAdmin(admin);
+        ArrayList<FairyCat> list = new ArrayList<>();
+        list.add(cat);
+        list.add(cat1);
+        admin.setAdminId(3);
+        fairyAdminDao.delete(admin);
     }
 
     @Test

@@ -36,16 +36,6 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.0.1</version>
         </dependency>
-        <!-- 热部署 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -61,6 +51,15 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.47</version>
         </dependency>
+        <!-- 热部署 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <!-- optional=true,依赖不会往下传递，如果有项目依赖本项目，并且想要使用devtools，需要重新引入 -->
+            <optional>true</optional>
+            <!-- scope=true ,计算用于编译，测试等的各种classpath路径,有助于确定在项目分布中需要导入的依赖-->
+            <scope>true</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -68,6 +67,18 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- 用于决定当前运行的进程是否被（分叉）管理，此设置在以下两种情况下会被自动启用：1.有明确的指定jvm参数路径或工作路径 2.存在devtools  -->
+                    <fork>true</fork><!-- 如果没有该配置，热部署的devtools不生效 PS：按照上面的说明其实这里默认会配置的 -->
+                </configuration>
+            </plugin>
+            <!-- 自定义配置spring Boot使用的JDK版本 -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>
