@@ -16,10 +16,10 @@ public class House {
     private Double area;            //面积
     private Integer floor;          //所在楼层
     private Integer age;            //房龄
-    private List<String> showPics;  //展示照片
     private Agent agent;            //经纪人
     private Community community;   //所在小区
     private Integer status;        //当前房屋状态：
+    private List<String> showPics;  //展示照片
 
     /**
      * 以下属性专门用于搜索
@@ -30,5 +30,11 @@ public class House {
     private String floorType;       //楼层类型（详见TypeDic）
     private String orieType;        //房屋朝向
     private String ageType;         //楼龄
+
+    /**
+     * 用于记录访问量
+     */
+    private Long traffic;           //访问量
+    private Long collectNumber;    //收藏数
 
 }

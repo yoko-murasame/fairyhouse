@@ -27,6 +27,19 @@ public class Community {
     private List<Store> nearbyStores = new ArrayList<>();  //附近门店（例：荣丰小区一店/宣武区广安门外大街305号）
     private List<House> houses = new ArrayList<>();         //小区里的房子
     private List<String> showPics = new ArrayList<>();     //展示照片
-    private Set<Agent> agentSet = new HashSet<>();  //经纪人，多对多
+    private Set<Agent> agentSet = new HashSet<>();         //经纪人，多对多
+
+    /**
+     * 用于搜索的字段
+     */
+    private String avgType;         //均价
+    private String houseType;       //例如：塔楼、板楼、塔板结合
+    private String ageType;         //楼龄
+
+    /**
+     * 用于记录访问量
+     */
+    private Long traffic;           //访问量
+    private Long collectNumber;    //收藏数
 
 }
