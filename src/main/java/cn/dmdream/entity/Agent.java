@@ -1,6 +1,8 @@
 package cn.dmdream.entity;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -18,6 +20,6 @@ public class Agent extends User {
     private String seniority;        //服务平台年限:  4-5年
     private String major;            //主营板块:  海淀公主坟 海淀万寿路 海淀五棵松
     private List<Community> communities;        //重点小区:  翠微东里 翠微北里 颐源居小区
-    private List<Client> clients;
+    private Set<Client> clients = new HashSet<>();  //客户，多对多
 
 }

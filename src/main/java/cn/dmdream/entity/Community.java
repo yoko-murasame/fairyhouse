@@ -1,7 +1,9 @@
 package cn.dmdream.entity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 小区实体类
@@ -12,6 +14,7 @@ public class Community {
     private Integer communityId;
     private Double longitude;           //经度
     private Double latitude;            //纬度
+    private String addressHead;         //地址的前缀，固定了的，是外键
     private String address;             //小区地址（例：(西城广安门)广安门外大街305号八区）
     private Double avgPrice;            //成交均价（例：121506元/平米）
     private String age;                  //建筑年代（例：2003年建成）
@@ -24,5 +27,6 @@ public class Community {
     private List<Store> nearbyStores = new ArrayList<>();  //附近门店（例：荣丰小区一店/宣武区广安门外大街305号）
     private List<House> houses = new ArrayList<>();         //小区里的房子
     private List<String> showPics = new ArrayList<>();     //展示照片
+    private Set<Agent> agentSet = new HashSet<>();  //经纪人，多对多
 
 }

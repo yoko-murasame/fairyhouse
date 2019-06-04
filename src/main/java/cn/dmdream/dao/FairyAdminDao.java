@@ -3,9 +3,11 @@ package cn.dmdream.dao;
 import cn.dmdream.entity.FairyAdmin;
 import cn.dmdream.entity.FairyCat;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Repository
@@ -13,6 +15,7 @@ public interface FairyAdminDao extends JpaRepository<FairyAdmin,Integer> {//两�
 
     //自定义方法，使用Jpa标准化查询语言
     public FairyAdmin findByAdminUsername(String username);
+
 
     //使用原生的sql进行查询
     @Query(value = "select * from tab_admin a,tab_cat c where a.adminId=c.admin_adminId and a.adminUsername like " +
@@ -25,3 +28,4 @@ public interface FairyAdminDao extends JpaRepository<FairyAdmin,Integer> {//两�
     public List<FairyAdmin> myFindAllByUsernameLike_JPQL(String username);
 
 }
+
