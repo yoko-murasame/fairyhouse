@@ -1,0 +1,58 @@
+body,
+ul,
+ol,
+a {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	cursor: pointer;
+}
+
+
+
+.fixed-navbar {
+	height: 100%;
+	width: 50px;
+	position: fixed;
+	right: 0px;
+	background-color: #ffffff;
+	box-shadow: -7px 0 5px -5px #333;
+}
+
+#right-nav {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+#right-nav>li {
+	height: 50px!important;
+	width: 50px!important;
+	text-align: center;
+	margin-bottom: 35px;
+	line-height: 50px;
+}
+
+.right-nav>li:hover {
+	background: black;
+}
+
+#right-nav>li>a {
+	padding: 4px;
+}
+
+
+/*button点击边框去除*/
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+	outline: none!important;
+}

@@ -1,0 +1,42 @@
+#crumbs-table-container {
+	width: 80%;
+	min-width: 1250px;
+	background-color: #fbfbfb;
+	margin: 0 auto;
+	margin-top: 20px;
+	box-shadow: 0 0 3px 3px #CCCCCC;
+	padding: 20px 25px;
+}
+
+#crumbs {
+	border: 0px;
+	margin: 0;
+	border-spacing: 2px;
+}
+
+#crumbs>tbody>tr>th,
+#crumbs>tfoot>tr>th,
+#crumbs>thead>tr>th {
+	border: 0px;
+}
+
+#crumbs>tbody>tr>td,
+#crumbs>tfoot>tr>td,
+#crumbs>thead>tr>td,
+{
+	border: 0px;
+}
+
+#crumbs>tbody>tr>td>input {
+	margin-right: 5px;
+}
+
+.table-bordered>tbody>tr>td {
+	border: 0px;
+	cursor: pointer!important;
+}
+
+#district-level {
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}

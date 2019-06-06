@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>经纪人界面</title>
+		<script src="js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<style type="text/css">
+		body{
+			height: 5120px;
+			background-color: #F1f1f1;
+		}
+		body,div,p{
+			margin: 0;
+			padding: 0;
+			font-size: 14px;
+			display: block;
+		}
+		dl, dt, dd, ul, ol, li,h3{
+    		list-style: none;
+   	 		margin: 0;
+    		padding: 0;
+		}
+		.wrapper{
+			width: 1000px;
+			margin: 0 auto;
+		}
+		.filter-box{
+			width: 1000px;
+			height: 111px;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+			margin-bottom: 15px;
+    		border-top: 2px solid #4fab69;
+    		display: block;
+		}
+		.pd{
+			height: 111px;
+			width: 1000px;
+		}
+		.bd{
+			height: 32px;
+			width: 948px;
+			padding: 18px 26px 12px;
+    		background: #fff;
+    		font-size: 12px;
+    		position: relative;
+		}
+		.filter-bar01{
+			height: 48px;
+    		line-height: 48px;
+	    	border-top: 1px solid #e0e0e0;
+	    	padding: 0 26px;
+    		font-size: 0;
+    		background: #fbfbfb;
+    		position: relative;
+		}
+		
+		/*导航栏--区域*/
+		.dl-1st{
+			height: 27px;
+			width: 948px;
+			padding-bottom: 5px;
+		}
+		.dl-1st dt{
+			float: left;
+			width: 36px;
+    		height: 27px;
+    		line-height: 27px;
+    		font-size: 12px;
+    		margin-right: 6px;
+    		font-weight: 700;
+    		display: block;
+		}
+		.dl-1st dd{
+			width: 946px;
+    		zoom: 1;
+    		display: block;
+    		font-size: 12px;
+		}
+		.option-list{
+			width: 946px;
+			height: 27px;
+			list-style: none;
+			font-size: 12px;
+			background: #FFF;
+		}
+		.option-list a{
+			padding: 10px 7px 15px;
+    		height: 27px;
+    		line-height: 27px;
+    		color: #333;
+    		font-size: 12px;
+    		text-decoration: none;
+    		outline: none;
+    		cursor: pointer;
+		}
+		.option-list a:hover{
+    		color: rgba(13,173,81);	
+    		text-decoration: underline;
+		}
+		
+		/*导航栏--排序*/
+		.sort-bar{
+			font-size: 14px;
+			width: 948px;
+		}
+		.sort-bar span{
+			height: 48px;
+			font-size: 12px;
+    		float: left;
+    		margin-right: 14px;
+    		font-weight: 700;
+		}
+		.sort-parent{
+			height: 48px;
+    		line-height: 48px;
+    		color: #555;
+    		background: #fff9f7;
+    		padding: 0 16px;
+    		position: relative;
+    		border: 1px solid #fbfbfb;
+    		border-top: 0;
+    		border-bottom: 0;
+    		float: left;
+    		background: none;
+    		margin-left: -1px;
+    		z-index: 1;
+		}
+		.sort-parent:hover{
+			background: #f1f1f1;
+		}
+		.sort-parent a{
+			text-decoration: none;
+    		outline: none;
+		}
+		.sort-parent span{
+			color: #555;
+    		margin: 0;
+    		font-weight: normal;
+    		font-size: 12px;
+    		float: left;
+		}
+		.onred{
+			font-weight: 700;
+			color: red;
+		}
+		
+		/*经纪人模块*/
+		.mainbox{
+			width: 1000px;
+			display: block;
+			margin-top: 15px;
+    		position: relative;
+    		height: auto;
+		}
+		.con-box{
+			display: block;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+		}
+		/*经纪人listhead*/
+		.list-head{
+			height: 50px;
+    		line-height: 50px;
+    		padding: 0 26px;
+    		background: none repeat scroll 0 0 #FFF;
+		}
+		.list-head h2{
+			height: 51px;
+			width: 140.75px;
+			float: left;
+    		font-weight: 700;
+    		margin: 0;
+    		padding: 0;
+		}
+		.pnumber{
+			color: #E4393C;
+    		margin: 0 5px;
+    		font-size: 16px;
+    		font-family: tahoma;
+    		display: inline;
+    		padding: 3px;
+    		width: 40px;
+    		height: 18px;
+		}
+		/*经纪人主要模块*/
+		.list-wrap{
+			margin: 0;
+			padding: 0;
+			display: block;
+			border-top: 1px solid #E0E0E0;
+		}
+		.agent-1st{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		.agent-1st li{
+			clear: both;
+    		width: 948px;
+    		padding: 26px 26px 6px 26px;
+    		border-bottom: 1px dotted #e1e1e1;
+    		position: relative;
+    		overflow: hidden;
+		}
+		.pic-panel{
+			font-size: 0;
+    		position: relative;
+    		width: 103px;
+    		float: left;
+    		overflow: hidden;
+    		display: block;
+		}
+		.pic-panel a{
+			text-decoration: none;
+    		outline: none;
+		}
+		.pic-panel img{
+			display: inline;
+    		height: 90px;
+    		border: 0;
+    		vertical-align: top;
+		}
+		.info-panel{
+			width: 841px;
+    		position: relative;
+    		float: right;
+    		padding-top: 4px;
+		}
+		.agent-name{
+			height: 32px;
+			display: block;
+		}
+		.name{
+			margin: 0;
+			padding: 0;
+			color: #555;
+    		overflow: hidden;
+    		font-weight: 700;
+    		float: left;
+    		text-overflow: ellipsis;
+    		font-size: 20px;
+    		white-space: nowrap;
+    		height: 32px;
+    		line-height: 20px;
+    		vertical-align: middle;
+    		font-family: "Hiragino Sans GB","微软雅黑","Microsoft YaHei",SimHei,Tahoma,"宋体b8b\4f53",SimSun,sans-serif;
+		}
+		.position{
+			background: #f1f1f1;
+    		padding: 4px;
+    		color: #888888;
+    		margin-left: 5px;
+    		border-radius: 2px;
+    		font-size: 12px;
+		}
+		.col-1{
+			width: 455px;
+    		float: left;
+		}
+		.main-plate{
+			overflow: hidden;
+    		clear: both;
+    		text-overflow: ellipsis;
+    		white-space: nowrap;
+    		color: #555;
+    		height: 18px;
+    		line-height: 18px;
+    		margin-top: 8px;
+    		font-weight: 700;
+		}
+		#mp-plate{
+			color: #999999;
+			font-weight: 400;
+			white-space: nowrap;
+			line-height: 18px;
+		}
+		#address a{
+			text-decoration: none;
+    		outline: none;
+    		color: #555;
+		}
+		#address a:hover{
+			text-decoration: underline;
+		}
+		
+		.achievement{
+			height: 31px;
+    		line-height: 31px;
+    		margin-top: 8px;
+    		width: 410px;
+    		white-space: nowrap;
+    		overflow: hidden;
+    		text-overflow: ellipsis;
+    		font-size: 14px;
+    		color: #999;
+		}
+		
+		.col-2{
+			width: 129px;
+    		text-align: right;
+    		float: left;
+    		position: relative;
+    		top: -14px;
+		}
+		.high-plate{
+			color: #e4393c;
+    		margin-top: 7px;
+    		width: 139px;
+    		position: relative;
+    		text-align: left;
+		}
+		.comment-num{
+			font-size: 14px;
+    		color: #999;
+    		font-family: Arial;
+    		margin-top: 10.5px;
+    		text-align: left;
+		}
+		.num{
+			font-size: 28px;
+    		font-weight: 700;
+    		margin-left: 4px;
+    		font-family: tahoma;
+    		letter-spacing: -1px;
+		}
+		.comment-num a{
+			text-decoration: none;
+    		outline: none;
+        	color: #999;
+		}
+		.comment-num a:hover{
+			text-decoration: underline;
+		}
+		.col-3{
+			width: 198px;
+    		position: relative;
+    		top: -18px;
+    		float: right;
+    		text-align: center;
+    		margin-top: 20px;
+		}
+		.col-3 h2{
+			margin: 0;
+			padding: 0;
+			font-size: 18px;
+    		color: #333333;
+    		font-weight: 700;
+    		float: left;
+		}
+		.method{
+			text-align: left;
+    		color: #999999;
+    		clear: both;
+    		padding-top: 6.7px;
+		}
+		div{
+			background-color: #FFF;
+		}
+		.changebg{
+			background: #fafafa;
+		}
+	</style>
+	<script type="text/javascript">
+	</script>
+	<body>
+		<div class="wrapper">
+			<div class="filter-box">
+				<div class="pd">
+					<div class="bd">
+						<dl class="dl-1st">
+							<dt><h3>区域:</h3></dt>
+							<dd>
+								<div class="option-list">
+									<a href="" >不限</a>
+									<a href="" >西湖</a>
+									<a href="" >下城</a>
+									<a href="" >江干</a>
+									<a href="" >拱墅</a>
+									<a href="" >上城</a>
+									<a href="" >滨江</a>
+									<a href="" >余杭</a>
+									<a href="" >萧山</a>
+								</div>
+								</dd>
+						</dl>
+					</div>
+					<div class="filter-bar01">
+						<div class="sort-bar">
+							<span>排序：</span>
+						<div class="sort-parent on">
+							<a href="">
+								<span>默认</span>
+							</a>
+						</div>
+						<div class="sort-parent">
+							<a href="">
+								<span>综合评分从高到低</span>
+							</a>
+						</div>
+						<div class="sort-parent">
+							<a href="">
+								<span>成交量从高到低</span>
+							</a>
+						</div>
+						<div class="sort-parent">
+							<a href="">
+								<span>带看量从高到低</span>
+							</a>
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mainbox">
+				<div class="con-box">
+					<div class="list-head">
+						<h2 style="font-size: 14px;">共有<span class="pnumber">1566</span>名经纪人</h2>
+					</div>
+					<div class="list-wrap">
+						<ul class="agent-1st">
+							<li>
+								<div class="pic-panel">
+									<a href=""><img src="../../imgs/nic-pic.jpg"/></a>
+								</div>
+								<div class="info-panel">
+									<div class="agent-name">
+										<a href="">
+											<h3 class="name">许海柱<h3>
+										</a>
+										<span class="position">店经理</span>
+									</div>
+									<div class="col-1">
+										<div class="main-plate">
+											<span id="mp-plate">
+												主营版块:&nbsp;&nbsp;
+											</span>
+											<span id="address">
+												<a href="">萧山&nbsp;</a>
+												<a href="">钱江世纪城</a>
+												&nbsp;&nbsp;&nbsp;
+											</span>
+										</div>
+										<div class="achievement">
+											<span>历史成交8套,</span>&nbsp;
+											<span>最近30天带看房51套</span>
+										</div>
+									</div>
+									<div class="col-2">
+										<div class="high-plate">
+											综合评分<span class="num">5.0</span>
+											
+										</div>
+										<div class="comment-num">
+											<a href="">评论110条</a>
+										</div>
+									</div>
+									<div class="col-3">
+										<h2>4008897372转5400</h2>
+										<p class="method">联系方式</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic-panel">
+									<a href=""><img src="https://image1.ljcdn.com/usercenter/images/uc_ehr_avatar/9dff1a30-ba86-4d20-b9e8-be572ced6dec.jpg.120x160.jpg"/></a>
+								</div>
+								<div class="info-panel">
+									<div class="agent-name">
+										<a href="">
+											<h3 class="name">贾微<h3>
+										</a>
+										<span class="position">高级经纪人</span>
+									</div>
+									<div class="col-1">
+										<div class="main-plate">
+											<span id="mp-plate">
+												主营版块:&nbsp;&nbsp;
+											</span>
+											<span id="address">
+												<a href="">余杭&nbsp;</a>
+												<a href="">闲林</a>
+												&nbsp;&nbsp;&nbsp;
+											</span>
+										</div>
+										<div class="achievement">
+											<span>历史成交15套,</span>&nbsp;
+											<span>最近30天带看房61套</span>
+										</div>
+									</div>
+									<div class="col-2">
+										<div class="high-plate">
+											综合评分<span class="num">4.9</span>
+											
+										</div>
+										<div class="comment-num">
+											<a href="">评论91条</a>
+										</div>
+									</div>
+									<div class="col-3">
+										<h2>4008897393转5200</h2>
+										<p class="method">联系方式</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
