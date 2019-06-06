@@ -28,23 +28,21 @@ public class EmptyUtils {
             }
 
             //集合
-            if (object instanceof Collection || object instanceof List || object instanceof Map || object instanceof
-                    Set) {
-                if (((Collection) object).size() == 0){
-                    return false;
-                }
-            }
+            if (object instanceof Collection || object instanceof Map) {
 
-            if(object instanceof List){
+                if (object instanceof Map) {
+                    return ((Map) object).isEmpty();
+                }
+
                 if (((Collection) object).size() == 0){
-                    return false;
+                    return true;
                 }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
-
         return false;
     }
 }

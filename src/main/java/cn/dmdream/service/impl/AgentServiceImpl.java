@@ -3,6 +3,7 @@ package cn.dmdream.service.impl;
 import cn.dmdream.dao.AgentDao;
 import cn.dmdream.entity.AgentEntity;
 import cn.dmdream.service.AgentService;
+import cn.dmdream.utils.EmptyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -105,20 +106,25 @@ public class AgentServiceImpl implements AgentService {
     private Specification<AgentEntity> getWhereClause(final AgentEntity searchAgent) {
         return new Specification<AgentEntity>() {
             @Override
-            public Predicate toPredicate(Root<AgentEntity> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+            public Predicate toPredicate(Root<AgentEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 
                 //1.创建条件列表
                 List<Predicate> predicates = new ArrayList<Predicate>();
                 //2.遍历对象依次增加条件
                 //2.1.按评分score条件
-                //if (searchAgent.getScore()!=0)
-
+                if (!EmptyUtils.isEmpty(searchAgent.getScore())) {
+                    predicates.add(cb.equal(root.get("score").as(Double.class), searchAgent.getScore()));
+                }
                 //2.2.按手机号phone
-
+                if (!EmptyUtils.isEmpty(searchAgent.getPhone())) {
+                    predicates.add(cb.equal(root.get("phone").as(String.class), searchAgent.getPhone()));
+                }
                 //2.3.按用户名username模糊查询
-
+                if (!EmptyUtils.isEmpty(searchAgent.getUsername())) {
+                    predicates.add(cb.like(root.get("username").as(String.class),searchAgent.getUsername()));
+                }
                 //2.4.按真实姓名realname模糊查询
-
+                //if (!EmptyUtils.isEmpty())
                 //2.5.按级别grade
 
                 //2.6.按能力值abilityTag
