@@ -2,6 +2,7 @@ package cn.dmdream.service.impl;
 
 import cn.dmdream.dao.AgentDao;
 import cn.dmdream.entity.AgentEntity;
+import cn.dmdream.entity.DictEntity;
 import cn.dmdream.service.AgentService;
 import cn.dmdream.utils.EmptyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,10 +90,10 @@ public class AgentServiceImpl implements AgentService {
     }
 
     @Override
-    public Page<AgentEntity> findAllByPage(AgentEntity agent, Integer page, Integer pageSize) {
+    public Page<AgentEntity> findAllByPage(AgentEntity agent,String sortField, Integer page, Integer pageSize) {
 
         //1.创建排序
-        Sort sort = Sort.by(Sort.Direction.ASC,"score");
+        Sort sort = Sort.by(Sort.Direction.ASC,sortField);
         //2.创建分页对象,page是从0开始
         PageRequest pageRequest = PageRequest.of(page - 1, pageSize, sort);
         //3.查询<1.条件对象:下面的方法已经封装好 2.page对象:里面有分页信息和排序信息> 返回pageBean
@@ -121,19 +122,38 @@ public class AgentServiceImpl implements AgentService {
                 }
                 //2.3.按用户名username模糊查询
                 if (!EmptyUtils.isEmpty(searchAgent.getUsername())) {
-                    predicates.add(cb.like(root.get("username").as(String.class),searchAgent.getUsername()));
+                    predicates.add(cb.like(root.get("username").as(String.class),"%"+searchAgent.getUsername()+"%"));
                 }
                 //2.4.按真实姓名realname模糊查询
-                //if (!EmptyUtils.isEmpty())
+                if (!EmptyUtils.isEmpty(searchAgent.getRealname())) {
+                    predicates.add(cb.like(root.get("realname").as(String.class), "%"+searchAgent.getRealname()+"%"));
+                }
+
                 //2.5.按级别grade
-
+                if (!EmptyUtils.isEmpty(searchAgent.getGrade())) {
+                    Join<AgentEntity,DictEntity> entityJoin = root.join("grade",JoinType.LEFT);
+                    predicates.add(cb.equal(entityJoin.get("id").as(Long.class), searchAgent.getGrade().getId()));
+                }
                 //2.6.按能力值abilityTag
-
+                if (!EmptyUtils.isEmpty(searchAgent.getAbilityTag())) {
+                    Join<AgentEntity,DictEntity> entityJoin = root.join("abilityTag",JoinType.LEFT);
+                    predicates.add(cb.equal(root.get("abilityTag").as(DictEntity.class), searchAgent.getAbilityTag()
+                            .getId()));
+                }
                 //2.7.按服务平台年限seniority
-
+                if (!EmptyUtils.isEmpty(searchAgent.getSeniority())) {
+                    Join<AgentEntity,DictEntity> entityJoin = root.join("seniority",JoinType.LEFT);
+                    predicates.add(cb.equal(root.get("seniority").as(DictEntity.class), searchAgent.getSeniority()
+                            .getId()));
+                }
                 //2.8.按主营板块major
-
-                return null;
+                if (!EmptyUtils.isEmpty(searchAgent.getMajor())) {
+                    Join<AgentEntity,DictEntity> entityJoin = root.join("major",JoinType.LEFT);
+                    predicates.add(cb.equal(root.get("major").as(DictEntity.class), searchAgent.getMajor().getId()));
+                }
+                //3.将条件转化返回
+                Predicate[] predicateArray = new Predicate[predicates.size()];
+                return query.where(predicates.toArray(predicateArray)).getRestriction();
             }
         };
     }

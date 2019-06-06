@@ -17,6 +17,6 @@ public interface AgentService {
 
     AgentEntity findById(Long id);
 
-    Page<AgentEntity> findAllByPage(AgentEntity agent, Integer page, Integer pageSize);
+    Page<AgentEntity> findAllByPage(AgentEntity agent,String sortField, Integer page, Integer pageSize);
 
 }

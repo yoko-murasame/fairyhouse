@@ -1,6 +1,8 @@
 package cn.dmdream.Service;
 
+import cn.dmdream.dao.DictDao;
 import cn.dmdream.entity.AgentEntity;
+import cn.dmdream.entity.DictEntity;
 import cn.dmdream.service.AgentService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +14,7 @@ import sun.management.resources.agent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -20,6 +23,9 @@ public class TestAgentService {
 
     @Autowired
     private AgentService agentService;
+
+    @Autowired
+    private DictDao dictDao;
 
     @Test
     public void saveTest() {
@@ -56,8 +62,17 @@ public class TestAgentService {
 
     @Test
     public void findAllTest() {
-        Page<AgentEntity> page = agentService.findAllByPage(new AgentEntity(), 1, 5);
 
+        Optional<DictEntity> dic1 = dictDao.findById((long) 61);
+        Optional<DictEntity> dic2 = dictDao.findById((long) 62);
+
+        AgentEntity entity = new AgentEntity();
+        //entity.setScore(3d);
+        //entity.setUsername("3");
+        entity.setGrade(dic1.get());
+        entity.setAbilityTag(dic2.get());
+
+        Page<AgentEntity> page = agentService.findAllByPage(entity, "score", 1, 5);
         page.getContent().forEach(System.out::println);
     }
 
