@@ -1,0 +1,105 @@
+#recommend-container {
+	width: 100%;
+	min-height: 200px;
+	min-width: 1400px;
+	padding: 0px 100px;
+}
+
+#recommmend-theme {
+	margin: 0;
+	font-weight: bold;
+	box-sizing: border-box;
+	padding-top: 50px;
+	padding-left: 25px;
+	font-size: 35px;
+}
+
+#recommend-intro {
+	margin-top: 10px;
+	font-size: 16px;
+	padding: 0 25px;
+	min-width: 1200px;
+	margin-bottom: 0px;
+}
+
+#recommend-intro>a {
+	text-decoration: none;
+	color: #333;
+}
+
+#recommend-more {
+	float: right;
+}
+
+#recommend-more:hover {
+	color: #aaa;
+}
+
+#recommend-intro-detail {
+	width: 100%;
+	margin-top: 30px;
+}
+
+#recommend-intro-detail>li {
+	width: 25%;
+}
+
+#recommend-intro-detail>li>a {
+	color: #333;
+}
+
+#recommend-intro-detail>li>a:hover {
+	background-color: #ffffff!important;
+}
+
+.intro-img {
+	width: 265px;
+	height: 205px;
+}
+
+#recommend-intro-container {
+	width: 100%;
+	min-width: 1200px;
+}
+
+.intro-click {
+	padding: 25px!important;
+}
+
+.intro-img {
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	box-shadow: 0 0 3px 3px #aaa;
+	cursor: pointer;
+}
+
+.position {
+	font-size: 24px;
+	height: 24px;
+	cursor: pointer;
+}
+
+.position:hover {
+	color: #aaa;
+}
+
+.tips>span:first {
+	color: #8080a1;
+}
+
+.tips-price {
+	float: right;
+	font-size: 21px;
+	color: #fa576b;
+}
+
+.intro-img {
+	transition: all 0.6s;
+}
+
+.intro-img:hover {
+	transform: scale(1.02);
+}

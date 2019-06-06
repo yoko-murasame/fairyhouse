@@ -1,0 +1,17 @@
+.community-recommend-ul>li {
+	width: 33.333%!important;
+}
+
+.position,
+.tips {
+	font-weight: bold;
+	padding: 0 10px;
+}
+
+.community-price {
+	font-size: 18px;
+}
+
+.community-age {
+	float: right;
+}
