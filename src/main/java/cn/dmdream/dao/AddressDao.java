@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface AddressDao extends JpaRepositoryImplementation<AddressEntity,Integer> {
+public interface AddressDao extends JpaRepositoryImplementation<AddressEntity,Long> {
 
     List<AddressEntity> findByParent(Integer parentId);
 

@@ -22,7 +22,6 @@ import java.util.Set;
 @Table(name = "tab_agent")
 public class AgentEntity extends BaseUserEntity {
 
-
     //经纪人级别：高级店经理、资深经纪人、综合经纪人等,一对一
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "grade",columnDefinition = "int comment '经纪人级别'")
@@ -74,4 +73,16 @@ public class AgentEntity extends BaseUserEntity {
     //带看房记录 一对多，被维护方，级联保存
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST,mappedBy = "agentEntity")
     private Set<HistoryEntity> historyEntities = new HashSet<>();
+
+    @Override
+    public String toString() {
+        return "AgentEntity{" +
+                "score=" + score +
+                ", username='" + username + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", realname='" + realname + '\'' +
+                ", nickname='" + nickname + '\'' +
+                '}';
+    }
 }

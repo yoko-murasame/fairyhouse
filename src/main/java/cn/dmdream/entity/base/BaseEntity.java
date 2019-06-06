@@ -16,19 +16,19 @@ public abstract class BaseEntity{
 
     @Getter @Setter
     @Column(name="createTime",columnDefinition="DATETIME comment '创建时间'")
-    protected Date createTime; //创建时间
+    protected Date createTime = new Date(); //创建时间
 
     @Getter @Setter
     @Column(name="destroyTime",columnDefinition="DATETIME comment '销毁时间'")
     protected Date destroyTime; //销毁时间
 
     @Getter @Setter
-    @Version @Column(name="version",nullable=false,columnDefinition="int(20) default 0 comment '版本号'")
-    protected Integer version;//乐观锁，使用@Version注解标明
+    @Version @Column(name="version",nullable=false,columnDefinition="int(20) default 1 comment '版本号'")
+    protected Integer version = 1;//乐观锁，使用@Version注解标明
 
     @Getter @Setter
     @Column(length=1,name="isValid",nullable=false,columnDefinition="int(1) default 1 comment '是否启用，1:启用  0:不启用'")
-    protected Integer isValid; //是否启用
+    protected Integer isValid = 1; //是否启用
 
     @Getter @Setter
     @Transient//不被映射到数据库

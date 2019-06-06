@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.support.JpaRepositoryImplementati
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ClientDao extends JpaRepositoryImplementation<ClientEntity, Integer> {
+public interface ClientDao extends JpaRepositoryImplementation<ClientEntity, Long> {
     ClientEntity findByPhoneIs(String phone);
 }

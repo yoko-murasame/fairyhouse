@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.support.JpaRepositoryImplementati
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CommunityDao extends JpaRepositoryImplementation<CommunityEntity, Integer> {
+public interface CommunityDao extends JpaRepositoryImplementation<CommunityEntity, Long> {
 
 }

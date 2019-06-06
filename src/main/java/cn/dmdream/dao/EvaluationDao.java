@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.support.JpaRepositoryImplementati
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EvaluationDao extends JpaRepositoryImplementation<EvaluationEntity, Integer> {
+public interface EvaluationDao extends JpaRepositoryImplementation<EvaluationEntity, Long> {
 
 }
