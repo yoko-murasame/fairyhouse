@@ -10,8 +10,9 @@ public class AdminController {
     @RequestMapping("/")
     public ModelAndView toIndex() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("helloworld.jsp");
+        modelAndView.setViewName("jsp/helloworld.jsp");
         return modelAndView;
     }
+
 
 }

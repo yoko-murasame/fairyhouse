@@ -22,7 +22,7 @@ public class EmptyUtils {
 
             //字符串
             if (object instanceof String){
-                if (object.toString().equals("") || object == null) {
+                if (object.toString().trim().equals("") || object == null) {
                     return true;
                 }
             }

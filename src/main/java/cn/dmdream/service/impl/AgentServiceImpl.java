@@ -90,10 +90,10 @@ public class AgentServiceImpl implements AgentService {
     }
 
     @Override
-    public Page<AgentEntity> findAllByPage(AgentEntity agent,String sortField, Integer page, Integer pageSize) {
+    public Page<AgentEntity> findAllByPage(AgentEntity agent,Sort sort, Integer page, Integer pageSize) {
 
         //1.创建排序
-        Sort sort = Sort.by(Sort.Direction.ASC,sortField);
+
         //2.创建分页对象,page是从0开始
         PageRequest pageRequest = PageRequest.of(page - 1, pageSize, sort);
         //3.查询<1.条件对象:下面的方法已经封装好 2.page对象:里面有分页信息和排序信息> 返回pageBean

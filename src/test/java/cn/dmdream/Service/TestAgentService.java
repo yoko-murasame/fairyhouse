@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 import sun.management.resources.agent;
 
@@ -71,8 +72,8 @@ public class TestAgentService {
         //entity.setUsername("3");
         entity.setGrade(dic1.get());
         entity.setAbilityTag(dic2.get());
-
-        Page<AgentEntity> page = agentService.findAllByPage(entity, "score", 1, 5);
+        Sort sort = Sort.by(Sort.Direction.DESC,"score");
+        Page<AgentEntity> page = agentService.findAllByPage(entity, sort, 1, 5);
         page.getContent().forEach(System.out::println);
     }
 

@@ -8,7 +8,7 @@ public class TestEmptyUtils {
 
     @Test
     public void test() {
-        String str = "";
+        String str = "  ";
         String str2 = null;
         String str3 = "123";
         List list = new ArrayList();

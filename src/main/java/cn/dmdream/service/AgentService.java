@@ -2,6 +2,7 @@ package cn.dmdream.service;
 
 import cn.dmdream.entity.AgentEntity;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 
 public interface AgentService {
 
@@ -17,6 +18,6 @@ public interface AgentService {
 
     AgentEntity findById(Long id);
 
-    Page<AgentEntity> findAllByPage(AgentEntity agent,String sortField, Integer page, Integer pageSize);
+    Page<AgentEntity> findAllByPage(AgentEntity agent, Sort sort, Integer page, Integer pageSize);
 
 }
