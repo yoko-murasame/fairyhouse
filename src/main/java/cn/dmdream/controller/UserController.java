@@ -17,31 +17,31 @@ public class UserController {
     @Autowired
     private AgentService agentService;
 
-    @RequestMapping("/index")
+    @RequestMapping("/")
     public ModelAndView toIndex() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("user/index.jsp");
+        modelAndView.setViewName("user/index");
         return modelAndView;
     }
 
     @RequestMapping("user/favorHouse")
     public ModelAndView toFavorHouse() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("user/personal-center-house.jsp");
+        modelAndView.setViewName("user/personal-center-house");
         return modelAndView;
     }
 
     @RequestMapping("user/favorCommunity")
     public ModelAndView toFavorCommunity() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("user/personal-center-community.jsp");
+        modelAndView.setViewName("user/personal-center-community");
         return modelAndView;
     }
 
     @RequestMapping("user/latestInfo")
     public ModelAndView toLatestInfo() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("user/personal-center-latest.jsp");
+        modelAndView.setViewName("user/personal-center-latest");
         return modelAndView;
     }
 
@@ -55,7 +55,7 @@ public class UserController {
         List<AgentEntity> list = pageModel.getContent();
         list.forEach(System.out::println);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("user/personal-center-agent.jsp");
+        modelAndView.setViewName("user/personal-center-agent");
         return modelAndView;
     }
 }

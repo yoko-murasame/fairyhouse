@@ -7,12 +7,13 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class AdminController {
 
-    @RequestMapping("/")
+    @RequestMapping("/admin")
     public ModelAndView toIndex() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("jsp/helloworld.jsp");
+        modelAndView.setViewName("admin/admin_index");
         return modelAndView;
     }
+
 
 
 }

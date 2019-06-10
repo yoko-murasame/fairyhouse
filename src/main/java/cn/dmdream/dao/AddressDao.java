@@ -10,5 +10,5 @@ public interface AddressDao extends JpaRepositoryImplementation<AddressEntity,Lo
 
     List<AddressEntity> findByParent(Integer parentId);
 
-    List<AddressEntity> findByAreaName(String areaName);
+    List<AddressEntity> findByAreaNameLike(String areaName);
 }
