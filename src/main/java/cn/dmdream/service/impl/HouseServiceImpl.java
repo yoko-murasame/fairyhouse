@@ -1,8 +1,10 @@
 package cn.dmdream.service.impl;
 
 import cn.dmdream.dao.HouseDao;
+import cn.dmdream.entity.CommunityEntity;
 import cn.dmdream.entity.HouseEntity;
 import cn.dmdream.service.HouseService;
+import cn.dmdream.utils.EmptyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,6 +13,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -110,6 +113,9 @@ public class HouseServiceImpl implements HouseService {
         return new Specification<HouseEntity>() {
             @Override
             public Predicate toPredicate(Root<HouseEntity> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                List<Predicate> predicates = new ArrayList<>();
+
+
                 return null;
             }
         };
