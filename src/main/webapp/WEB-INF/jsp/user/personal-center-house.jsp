@@ -171,16 +171,16 @@
 						<nav class="navbar">
 							<ul class="nav choice">
 								<li>
-									<a href="personalCenterLatest">最新动态</a>
+									<a href="latestInfo">最新动态</a>
 								</li>
 								<li>
-									<a href="personalCenterFavorHouse" class="choice-visited">关注房源</a>
+									<a href="favorHouse" class="choice-visited">关注房源</a>
 								</li>
 								<li>
-									<a href="personalCenterFavorCommunity">关注小区</a>
+									<a href="favorCommunity">关注小区</a>
 								</li>
 								<li>
-									<a href="personalCenterAgent">我的经纪人</a>
+									<a href="personalAgent">我的经纪人</a>
 								</li>
 								<li>
 									<a href="#">个人资料</a>
@@ -207,7 +207,7 @@
 								</div>
 								<div class="address">
 									<div class="houseInfo">
-										<a href="#" target="" class="house-a"><span><img class="icon" src="../../../imgs/house.png">红街公寓<span> </a> 
+										<a href="#" target="" class="house-a"><span><img class="icon" src="../../../imgs/house.png">红街公寓</span> </a>
 									<span>
 									| 2室2厅 | 85.14平米 | 南 北 | 精装
 									</span>
@@ -216,7 +216,7 @@
 								<div class="flood">
 									<div class="positionInfo">
 										<span class="positionIcon"><img class="icon" src="../../../imgs/position.png">中楼层(共18层)2010年建板楼-</span>
-										<a href="#" target="_blank"><span>火车东站</span></a>
+										<a href="#" target="" class="house-a"><span>火车东站</span></a>
 									</div>
 								</div>
 								<div class="followInfo">
@@ -249,7 +249,7 @@
 								</div>
 								<div class="address">
 									<div class="houseInfo">
-										<a href="#" target="_blank" class="house-a"><span><img class="icon" src="../../../imgs/house.png">红街公寓<span> </a> 
+										<a href="#" target="_blank" class="house-a"><span><img class="icon" src="../../../imgs/house.png">红街公寓</span> </a>
 									<span>
 									| 2室2厅 | 85.14平米 | 南 北 | 精装
 									</span>
@@ -258,7 +258,7 @@
 								<div class="flood">
 									<div class="positionInfo">
 										<span class="positionIcon"><img class="icon" src="../../../imgs/position.png">中楼层(共18层)2010年建板楼-</span>
-										<a href="#" target="_blank"><span>火车东站</span></a>
+										<a href="#" target="" class="house-a"><span>火车东站</span></a>
 									</div>
 								</div>
 								<div class="followInfo">

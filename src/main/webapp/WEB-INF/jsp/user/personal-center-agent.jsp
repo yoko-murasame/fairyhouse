@@ -271,16 +271,16 @@
 						<nav class="navbar">
 							<ul class="nav choice">
 								<li>
-									<a href="personalCenterLatest">最新动态</a>
+									<a href="latestInfo">最新动态</a>
 								</li>
 								<li>
-									<a href="personalCenterFavorHouse">关注房源</a>
+									<a href="favorHouse">关注房源</a>
 								</li>
 								<li>
-									<a href="personalCenterFavorCommunity">关注小区</a>
+									<a href="favorCommunity">关注小区</a>
 								</li>
 								<li>
-									<a href="personalCenterAgent" class="choice-visited">我的经纪人</a>
+									<a href="personalAgent" class="choice-visited">我的经纪人</a>
 								</li>
 								<li>
 									<a href="#">个人资料</a>
@@ -305,7 +305,7 @@
 									<div class="info-panel">
 										<div class="agent-name">
 											<a href="#">
-												<h3 class="name">许海柱<h3>
+												<h3 class="name">许海柱</h3>
 											</a>
 										<span class="position">店经理</span>
 										</div>
@@ -345,7 +345,7 @@
 									<div class="info-panel">
 										<div class="agent-name">
 											<a href="#">
-												<h3 class="name">许海柱<h3>
+												<h3 class="name">许海柱</h3>
 											</a>
 										<span class="position">店经理</span>
 										</div>

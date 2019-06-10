@@ -29,16 +29,16 @@
 						<nav class="navbar">
 							<ul class="nav choice">
 								<li>
-									<a href="personalCenterLatest">最新动态</a>
+									<a href="latestInfo">最新动态</a>
 								</li>
 								<li>
-									<a href="personalCenterFavorHouse">关注房源</a>
+									<a href="favorHouse">关注房源</a>
 								</li>
 								<li>
-									<a href="personalCenterFavorCommunity" class="choice-visited">关注小区</a>
+									<a href="favorCommunity" class="choice-visited">关注小区</a>
 								</li>
 								<li>
-									<a href="personalCenterAgent">我的经纪人</a>
+									<a href="personalAgent">我的经纪人</a>
 								</li>
 								<li>
 									<a href="#">个人资料</a>
