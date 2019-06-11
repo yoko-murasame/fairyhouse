@@ -9,10 +9,6 @@
 		<!--		<script type="text/javascript" src="js/jquery-3.4.0.js"></script>
 		<script type="text/javascript" src="js/bootstrap.js"></script>
 		<link rel="stylesheet" href="css/bootstrap.css" />-->
-		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-		<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-		<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-
 		<style>
 			.foot-container {
 				padding-top: 30px;

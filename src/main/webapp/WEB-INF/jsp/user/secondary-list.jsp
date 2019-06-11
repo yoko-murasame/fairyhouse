@@ -1,26 +1,27 @@
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
 	<head>
-		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-		<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-		<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
 		<meta charset="UTF-8">
 		<title></title>
 	</head>
 	<style>
-		.container {
-			width: 75%;
+		.containerr {
+			width: 100%;
 			margin-top: 1%;
+			padding-left: 15%;
 		}
 		
-		#content {
+		#contentt {
 			margin-top: 5%;
-			margin-left: -3.5%;
-		}
-		
+			margin-left: -3.5%;}
+
+
 		.sencondary-a {
 			color: black;
 			/*	font-size: large;*/
@@ -46,7 +47,7 @@
 		}
 		
 		.hr {
-			margin-top: -1%;
+			margin-top: -0.7%;
 		}
 		
 		.detail_content {
@@ -130,20 +131,31 @@
 		}
 		
 		.icon_img {
-			width: 25%;
-			height: 25%;
+			width: 22%;
+			height: 3%;
 		}
 		
 		.li {
 			width: 7%;
 			margin-left: 0%;
 		}
+		.house_li{
+			margin-bottom: 3%;
+		}
 	</style>
 
+	<script>
+        $(function(){
+            $("#toAttention").click(function () {
+                alert(1);
+                showGritter("消息", "关注成功!");
+            })
+        })
+	</script>
 	<body>
-		<div class="container">
+		<div class="containerr">
 			<div>
-				<ul class="list-inline" id="footer_ul">
+				<ul class="list-inline" >
 					<li id="fist_li" class="li">
 						<a class="sencondary-a" href="#" id="fist_a">默认排序</a>
 					</li>
@@ -159,110 +171,90 @@
 					<li class="li">
 						<a class="sencondary-a" href="#">带看较多</a>
 					</li>
-					<li style="margin-left: 50%;" class="li">
+				<%--	<li style="margin-left: 50%;" class="li">
 						<img style="margin-right: 10%;" class="icon_img" src="../../../imgs/list_icon1.png">
 						<img class="icon_img" src="../../../imgs/list_icon.png">
-					</li>
+					</li>--%>
 				</ul>
 			</div>
 			<hr class="hr" />
 			<div class="fist_head">
 				<h4 class="total_house">共找到<span> 3862 </span>套杭州二手房</h4>
 			</div>
-			<div id="content">
-				<ul>
-					<li>
-						<a href="#" target="_blank"><img class="img" src="../../imgs/house1.jpg" alt="红街公寓配套齐全  采光好 房东诚心出售"></a>
-						<div class="detail_content">
-							<div class="title">
-								<a class="" href="#" target="_blank" style="color: gray;">红街公寓配套齐全 采光好 房东诚心出售</a>
-							</div>
-							<br />
-							<div class="address">
-								<div class="houseInfo">
-									<a href="#" target="_blank"><span><img class="icon" src="../../../imgs/house.png">红街公寓<span> </a> 
-									<span>
-									| 2室2厅 | 85.14平米 | 南 北 | 精装 | 有电梯
-									</span>
-								</div>
-							</div>
-							<div class="flood">
-								<div class="positionInfo">
-									<span class="positionIcon"><img class="icon" src="../../../imgs/position.png">中楼层(共18层)2010年建板楼-</span>
-									<a href="#" target="_blank"><span>火车东站</span></a>
-								</div>
-							</div>
-							<div class="followInfo">
-								<span class="starIcon"><img class="icon" src="../../../imgs/collection.png">51人关注 / 共36次带看 / 9个月以前发布</span>
-							</div>
-							<div class="tag">
-								<span class="label label-primary">近地铁</span>
-								<span class="label label-primary">好看</span>
-								<span class="label label-primary">随时看房</span>
-							</div>
-							<div class="priceInfo">
-								<div class="totalPrice">
-									<span class="price_style">325</span><span style="color: red; font-size: x-large;">万</span>
-								</div>
-								<div class="unitPrice">
-									<span>单价38173元/平米</span>
-								</div>
-							</div>
-							<div class="listButtonContainer">
-								<span><Button class="btn">关注</button></span>
-								<span><Button class="btn">加入对比</button></span>
-							</div>
-						</div>
-					</li>
+			<div id="contentt">
 
+				<c:forEach items="${pageModel.content}" var="comm">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					${comm.title} 地址: ${comm.addressHead.areaName} ${comm.address}
 
-					<li>
-						<a href="#" target="_blank"><img class="img" src="../../imgs/house1.jpg" alt="红街公寓配套齐全  采光好 房东诚心出售"></a>
-						<div class="detail_content">
-							<div class="title">
-								<a class="" href="#" target="_blank" style="color: gray;">红街公寓配套齐全 采光好 房东诚心出售</a>
-							</div>
-							<br />
-							<div class="address">
-								<div class="houseInfo">
-									<a href="#" target="_blank"><span><img class="icon" src="../../../imgs/house.png">红街公寓<span> </a>
-									<span>
-									| 2室2厅 | 85.14平米 | 南 北 | 精装 | 有电梯
+					<ul>
+						<c:forEach items="${comm.houseEntities}" var="house">
+
+							<li class="house_li">
+								<a href="/second/toInfoPage?id=${house.id}" target="_blank">
+									<%--没有图片时默认显示--%>
+									<c:if test="${empty house.showPics}">
+										<img class="img" src="../../../imgs/house1.jpg" alt="${house.title}">
+									</c:if>
+									<c:if test="${not empty house.showPics}">
+										<c:forEach items="${house.showPics}" var="pic" begin="0" end="0">
+											<img class="img" src="${pic.picUrl}" alt="${house.title}">
+										</c:forEach>
+									</c:if>
+								</a>
+								<div class="detail_content">
+									<div class="title">
+										<a href="/second/toInfoPage?id=${house.id}" target="_blank" style="color: gray;">${house.title}</a>
+									</div>
+									<br />
+									<div class="address">
+										<div class="houseInfo">
+											<a href="#" target="_blank"><span><img class="icon" src="../../../imgs/house.png">${comm.title}</span> </a>
+											<span>
+									| ${house.houseType.typeDescription} | ${house.area} | ${house.orieType.typeDescription} | ${house.floor}楼 |  ${house.floorType.typeDescription}
 									</span>
+										</div>
+									</div>
+									<div class="flood">
+										<div class="positionInfo">
+											<span class="positionIcon"><img class="icon" src="../../../imgs/position.png">${house.floorType.typeDescription}(第${house.floor}层)${comm.age}年建${comm.type}-</span>
+											<%--这里需要跳转公寓列表--%>
+											<a href="#" target="_blank"><span>${comm.addressHead.areaName}</span></a>
+										</div>
+									</div>
+									<div class="followInfo">
+										<span class="starIcon"><img class="icon" src="../../../imgs/collection.png">${fn:length(house.clientEntities)}人关注 / 共${fn:length(house.histories)}次带看 / <fmt:formatDate value="${house.createTime}" pattern="yyyy-MM"/>月发布</span>
+									</div>
+									<div class="tag">
+										<span class="label label-primary">近地铁</span>
+										<span class="label label-primary">好看</span>
+										<span class="label label-primary">随时看房</span>
+									</div>
+									<div class="priceInfo">
+										<div class="totalPrice">
+											<span class="price_style">${house.price}</span><span style="color: red; font-size: x-large;">万</span>
+										</div>
+										<div class="unitPrice">
+											<span>单价${house.perPrice}元/平米</span>
+										</div>
+									</div>
+									<div class="listButtonContainer">
+										<span><Button class="btn" onclick="showGritter('消息','关注成功!')">关注</button></span>
+										<span><Button class="btn">加入对比</button></span>
+									</div>
 								</div>
-							</div>
-							<div class="flood">
-								<div class="positionInfo">
-									<span class="positionIcon"><img class="icon" src="../../../imgs/position.png">中楼层(共18层)2010年建板楼-</span>
-									<a href="#" target="_blank"><span>火车东站</span></a>
-								</div>
-							</div>
-							<div class="followInfo">
-								<span class="starIcon"><img class="icon" src="../../../imgs/collection.png">51人关注 / 共36次带看 / 9个月以前发布</span>
-							</div>
-							<div class="tag">
-								<span class="label label-primary">近地铁</span>
-								<span class="label label-primary">好看</span>
-								<span class="label label-primary">随时看房</span>
-							</div>
-							<div class="priceInfo">
-								<div class="totalPrice">
-									<span class="price_style">325</span><span style="color: red; font-size: x-large;">万</span>
-								</div>
-								<div class="unitPrice">
-									<span>单价38173元/平米</span>
-								</div>
-							</div>
-							<div class="listButtonContainer">
-								<span><Button class="btn">关注</button></span>
-								<span><Button class="btn">加入对比</button></span>
-							</div>
-						</div>
-					</li>
-				</ul>
+							</li>
+
+						</c:forEach>
+
+					</ul>
+
+				</c:forEach>
+
 			</div>
 		</div>
 
 	</body>
+
 
 </html>

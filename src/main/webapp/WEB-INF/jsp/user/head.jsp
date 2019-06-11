@@ -6,9 +6,11 @@
 	<head>
 		<meta charset="utf-8" />
 		<title></title>
-		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-		<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-		<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+		<link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.css" rel="stylesheet">
+		<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+		<script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/js/bootstrap.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../../js/gritter/css/jquery.gritter.css" />
+		<script type="text/javascript" src="../../../js/gritter/js/jquery.gritter.js"></script>
 
 		<style>
 			.container {

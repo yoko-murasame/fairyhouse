@@ -8,7 +8,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -32,6 +34,8 @@ public class HouseEntity extends BaseEntity {
     private String address;         //地址，具体到户
     @Column(columnDefinition = "decimal(10,2) comment '价格'")
     private BigDecimal price;           //价格
+    @Column(columnDefinition = "decimal(10,2) comment '每平米价格'")
+    private BigDecimal perPrice;           //每平米价格
     @Column(columnDefinition = "double comment '面积'")
     private Double area;            //面积
     @Column(columnDefinition = "int comment '所在楼层'")
@@ -44,18 +48,18 @@ public class HouseEntity extends BaseEntity {
     private AgentEntity agentEntity;
 
     //所在小区 多对一
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.DETACH})
-    @JoinColumn(name = "communityEntity",columnDefinition = "int comment '所属的小区'")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinColumn(name = "communityEntity", columnDefinition = "int comment '所属的小区'")
     private CommunityEntity communityEntity;
 
     @Column(columnDefinition = "int comment '当前房屋状态'")
     private Integer status;        //当前房屋状态：
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "house")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "house")
     private Set<PictureEntity> showPics = new HashSet<>();  //展示照片
 
     //房屋评价 一对多 全部级联权限
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "houseEntity")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "houseEntity")
     private Set<EvaluationEntity> evaluations = new HashSet<>();
 
     /**
@@ -87,16 +91,21 @@ public class HouseEntity extends BaseEntity {
     private Long traffic;//访问量
 
     //房子关注者集合,多对多,被维护方,无级联操作
-    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "houseEntityCollections")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "houseEntityCollections")
     private Set<ClientEntity> clientEntities = new HashSet<>();
 
     //房子所属人(拥有者),多对一,维护方,不可为空
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.DETACH},fetch =
-            FetchType.EAGER,optional = false)
-    @JoinColumn(nullable = false,columnDefinition = "int comment '房子的拥有者'")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch =
+            FetchType.EAGER, optional = false)
+    @JoinColumn(nullable = false, columnDefinition = "int comment '房子的拥有者'")
     private ClientEntity houseOwner;
 
+    //带看记录
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH},fetch = FetchType.EAGER,mappedBy = "houseEntity")
+    private List<HistoryEntity> histories = new ArrayList<HistoryEntity>();
+
     @Override
+
     public String toString() {
         return "HouseEntity{" +
                 "title='" + title + '\'' +

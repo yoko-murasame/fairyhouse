@@ -23,10 +23,6 @@
 <div>
     <jsp:include page="secondary-list.jsp"/>
 </div>
-<%--<c:forEach items="${list}" var="comm">
-    <li>${comm.address}</li>
-
-</c:forEach>--%>
 
 <div >
     <jsp:include page="footer.jsp"/>

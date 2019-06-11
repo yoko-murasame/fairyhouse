@@ -45,3 +45,30 @@ function getPostAjaxPromiseForForm(url,form){
         });
     });
 }
+
+//gritter抽取
+//显示自动隐藏的gritter
+function showGritter(title,text){
+    $.gritter.add({
+        title: title,
+        text: text,
+        sticky: false,
+        time: 3000
+    });
+    return false;
+}
+//不会隐藏的gritter
+function showStikyGritter(title,text){
+    $.gritter.add({
+        title: title,
+        text: text,
+        sticky: false,
+        time: 3000
+    });
+    return false;
+}
+//隐藏所有gritter
+function removeAllGritters(){
+    $.gritter.removeAll();
+    return false;
+}

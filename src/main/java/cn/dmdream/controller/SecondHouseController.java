@@ -37,17 +37,23 @@ public class SecondHouseController {
         Sort sort = Sort.by(Sort.Direction.DESC, "createTime");
         Page<CommunityEntity> pageModel = communityService.findByCommunityByPage(communityEntity, sort, 1, 10);
 
-        System.out.println(pageModel);
         List<CommunityEntity> list = pageModel.getContent();
         for (CommunityEntity comm :
                 list) {
             System.out.println(comm);
             System.out.println(comm.getAddressHead().getAreaName());
-            System.out.println(comm.getHouseEntities());
+            System.out.println("==========");
+            Set<HouseEntity> houseEntities = comm.getHouseEntities();
+            for (HouseEntity houseEntity : houseEntities) {
+                System.out.println("------------");
+                System.out.println(houseEntity);
+                System.out.println("------------");
+                System.out.println(houseEntity.getShowPics());
+            }
             System.out.println("==========");
         }
         ModelAndView modelAndView = new ModelAndView("user/SecondHousePage");
-        modelAndView.addObject("list", list);
+        modelAndView.addObject("pageModel", pageModel);
 
         return modelAndView;
     }

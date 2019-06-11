@@ -24,6 +24,9 @@ import java.util.Set;
 @Table(name = "tab_community")
 public class CommunityEntity extends BaseEntity {
 
+    @Column
+    private String title;
+
     @Column(nullable = false)
     private Double longitude;           //经度
     @Column(nullable = false)
@@ -101,7 +104,8 @@ public class CommunityEntity extends BaseEntity {
     @Override
     public String toString() {
         return "CommunityEntity{" +
-                "longitude=" + longitude +
+                "title='" + title + '\'' +
+                ", longitude=" + longitude +
                 ", latitude=" + latitude +
                 ", addressHead=" + addressHead +
                 ", address='" + address + '\'' +
@@ -113,6 +117,7 @@ public class CommunityEntity extends BaseEntity {
                 ", developers='" + developers + '\'' +
                 ", buildingCounts=" + buildingCounts +
                 ", houseCounts=" + houseCounts +
+                ", showPics=" + showPics +
                 ", avgType=" + avgType +
                 ", houseType=" + houseType +
                 ", ageType=" + ageType +
