@@ -22,6 +22,8 @@ public class HouseEntity extends BaseEntity {
     /**
      * 固有属性
      */
+    @Column(columnDefinition = "varchar(255) comment '房源标题'")
+    private String title;
     @Column(columnDefinition = "double comment '经度'")
     private Double longitude;       //经度
     @Column(columnDefinition = "double comment '纬度'")
@@ -97,7 +99,8 @@ public class HouseEntity extends BaseEntity {
     @Override
     public String toString() {
         return "HouseEntity{" +
-                "longitude=" + longitude +
+                "title='" + title + '\'' +
+                ", longitude=" + longitude +
                 ", latitude=" + latitude +
                 ", address='" + address + '\'' +
                 ", price=" + price +
@@ -107,6 +110,8 @@ public class HouseEntity extends BaseEntity {
                 ", agentEntity=" + agentEntity +
                 ", communityEntity=" + communityEntity +
                 ", status=" + status +
+                ", showPics=" + showPics +
+                ", evaluations=" + evaluations +
                 ", priceType=" + priceType +
                 ", houseType=" + houseType +
                 ", areaType=" + areaType +
@@ -114,6 +119,7 @@ public class HouseEntity extends BaseEntity {
                 ", orieType=" + orieType +
                 ", ageType=" + ageType +
                 ", traffic=" + traffic +
+                ", clientEntities=" + clientEntities +
                 ", houseOwner=" + houseOwner +
                 '}';
     }

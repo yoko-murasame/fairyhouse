@@ -214,6 +214,51 @@
 							</div>
 						</div>
 					</li>
+
+
+					<li>
+						<a href="#" target="_blank"><img class="img" src="../../imgs/house1.jpg" alt="红街公寓配套齐全  采光好 房东诚心出售"></a>
+						<div class="detail_content">
+							<div class="title">
+								<a class="" href="#" target="_blank" style="color: gray;">红街公寓配套齐全 采光好 房东诚心出售</a>
+							</div>
+							<br />
+							<div class="address">
+								<div class="houseInfo">
+									<a href="#" target="_blank"><span><img class="icon" src="../../../imgs/house.png">红街公寓<span> </a>
+									<span>
+									| 2室2厅 | 85.14平米 | 南 北 | 精装 | 有电梯
+									</span>
+								</div>
+							</div>
+							<div class="flood">
+								<div class="positionInfo">
+									<span class="positionIcon"><img class="icon" src="../../../imgs/position.png">中楼层(共18层)2010年建板楼-</span>
+									<a href="#" target="_blank"><span>火车东站</span></a>
+								</div>
+							</div>
+							<div class="followInfo">
+								<span class="starIcon"><img class="icon" src="../../../imgs/collection.png">51人关注 / 共36次带看 / 9个月以前发布</span>
+							</div>
+							<div class="tag">
+								<span class="label label-primary">近地铁</span>
+								<span class="label label-primary">好看</span>
+								<span class="label label-primary">随时看房</span>
+							</div>
+							<div class="priceInfo">
+								<div class="totalPrice">
+									<span class="price_style">325</span><span style="color: red; font-size: x-large;">万</span>
+								</div>
+								<div class="unitPrice">
+									<span>单价38173元/平米</span>
+								</div>
+							</div>
+							<div class="listButtonContainer">
+								<span><Button class="btn">关注</button></span>
+								<span><Button class="btn">加入对比</button></span>
+							</div>
+						</div>
+					</li>
 				</ul>
 			</div>
 		</div>

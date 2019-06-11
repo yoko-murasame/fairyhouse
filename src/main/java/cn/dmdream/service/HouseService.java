@@ -20,4 +20,6 @@ public interface HouseService {
 
     Page<HouseEntity> findByHouseByPage(HouseEntity houseEntity, Sort sort, Integer page, Integer pageSize);
 
+    HouseEntity findById(Long id);
+
 }

@@ -18,7 +18,8 @@
 				padding-top: 30px;
 				padding-bottom: 80px;
 				width: 100%;
-				height: 5%;
+				margin-top: 5%;
+
 				background-color: #333;
 				box-shadow: 0 7px 5px -5px #333;
 			}

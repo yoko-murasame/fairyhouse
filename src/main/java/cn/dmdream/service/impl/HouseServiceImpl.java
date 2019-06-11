@@ -106,6 +106,19 @@ public class HouseServiceImpl implements HouseService {
         }
     }
 
+    @Override
+    public HouseEntity findById(Long id) {
+
+        try {
+            HouseEntity house = houseDao.findById(id).get();
+
+            return house;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     /**
      * 动态创建条件
      */
@@ -114,8 +127,6 @@ public class HouseServiceImpl implements HouseService {
             @Override
             public Predicate toPredicate(Root<HouseEntity> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
                 List<Predicate> predicates = new ArrayList<>();
-
-
                 return null;
             }
         };
