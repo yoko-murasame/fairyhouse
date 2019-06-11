@@ -15,8 +15,8 @@ import javax.persistence.Table;
 @Table(name = "tab_dict")
 public class DictEntity extends BaseEntity {
 
-    @Column(name = "typeNum",columnDefinition = "varchar(255) comment '字典表类型编号'")
-    private String typeNum;
+    @Column(name = "typeNum",columnDefinition = "int comment '字典表类型编号'")
+    private Integer typeNum;
 
     @Column(name = "typeName",columnDefinition = "varchar(255) comment '字典表类型名称'")
     private String typeName;

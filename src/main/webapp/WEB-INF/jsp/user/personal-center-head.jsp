@@ -6,7 +6,12 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title></title>
-		<link rel="stylesheet" type="text/css" href="../../../css/bootstrap.css" />
+		<link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.css" rel="stylesheet">
+		<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+		<script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/js/bootstrap.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../../js/gritter/css/jquery.gritter.css" />
+		<script type="text/javascript" src="../../../js/gritter/js/jquery.gritter.js"></script>
+		<script type="text/javascript" src="../../../js/common.js"></script>
 		<link rel="stylesheet" type="text/css" href="../../../css/personal-center-head.css" />
 	</head>
 

@@ -2,7 +2,7 @@
 <%@page pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -145,36 +145,24 @@
 	</style>
 
 	<script>
-        $(function(){
-            $("#toAttention").click(function () {
-                alert(1);
-                showGritter("消息", "关注成功!");
-            })
-        })
+
 	</script>
 	<body>
 		<div class="containerr">
 			<div>
 				<ul class="list-inline" >
 					<li id="fist_li" class="li">
-						<a class="sencondary-a" href="#" id="fist_a">默认排序</a>
+						<a class="sencondary-a" href="/second/toSecondList?keyword=${keyword}" id="fist_a">默认排序</a>
 					</li>
 					<li class="li">
-						<a class="sencondary-a" href="#">最新</a>
+						<a class="sencondary-a" href="/second/toSecondList?keyword=${keyword}&sortField=createTime&order=DESC">最新</a>
 					</li>
 					<li class="li">
-						<a class="sencondary-a" href="#">价格</a>
+						<a class="sencondary-a" href="/second/toSecondList?keyword=${keyword}&sortField=houseEntities.price&order=DESC">价格</a>
 					</li>
 					<li class="li">
-						<a class="sencondary-a" href="#">面积</a>
+						<a class="sencondary-a" href="/second/toSecondList?keyword=${keyword}&sortField=houseEntities.traffic">带看较多</a>
 					</li>
-					<li class="li">
-						<a class="sencondary-a" href="#">带看较多</a>
-					</li>
-				<%--	<li style="margin-left: 50%;" class="li">
-						<img style="margin-right: 10%;" class="icon_img" src="../../../imgs/list_icon1.png">
-						<img class="icon_img" src="../../../imgs/list_icon.png">
-					</li>--%>
 				</ul>
 			</div>
 			<hr class="hr" />
@@ -232,7 +220,7 @@
 									</div>
 									<div class="priceInfo">
 										<div class="totalPrice">
-											<span class="price_style">${house.price}</span><span style="color: red; font-size: x-large;">万</span>
+											<span class="price_style"><fmt:formatNumber value="${house.price/10000}" type="number" pattern="￥000"/></span><span style="color: red; font-size: x-large;">万</span>
 										</div>
 										<div class="unitPrice">
 											<span>单价${house.perPrice}元/平米</span>
@@ -240,7 +228,7 @@
 									</div>
 									<div class="listButtonContainer">
 										<span><Button class="btn" onclick="showGritter('消息','关注成功!')">关注</button></span>
-										<span><Button class="btn">加入对比</button></span>
+										<span><Button class="btn" onclick="showGritter('消息','成功加入对比!')">加入对比</button></span>
 									</div>
 								</div>
 							</li>

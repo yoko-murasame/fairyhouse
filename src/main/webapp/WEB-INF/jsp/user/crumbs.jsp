@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" %>
 <%@page pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -11,8 +12,8 @@
 	</head>
 
 	<body>
-		<div id="crumbs-table-container">
-			<table class="table table-bordered" id="crumbs">
+		<div id="crumbs-table-container" style="width: 70%;">
+			<table class="table table-bordered" id="crumbs" >
 				<tr>
 					<th>位置</th>
 					<td>区域</td>
@@ -29,34 +30,28 @@
 					<td></td>
 				</tr>
 				<tr>
+					<th>楼层</th>
+					<c:forEach items="${dictMap['楼层']}" var="dict">
+						<td><input type="checkbox"><span>${dict.typeDescription}</span></td>
+					</c:forEach>
+				</tr>
+				<tr>
+					<th>朝向</th>
+					<c:forEach items="${dictMap['朝向']}" var="dict">
+						<td><input type="checkbox"><span>${dict.typeDescription}</span></td>
+					</c:forEach>
+				</tr>
+				<tr>
+					<th>楼龄</th>
+					<c:forEach items="${dictMap['楼龄']}" var="dict">
+						<td><input type="checkbox"><span>${dict.typeDescription}</span></td>
+					</c:forEach>
+				</tr>
+				<tr>
 					<th>售价</th>
-					<td><input type="checkbox"><span>50万以下</span></td>
-					<td><input type="checkbox"><span>50万以下</span></td>
-					<td><input type="checkbox"><span>50万以下</span></td>
-					<td><input type="checkbox"><span>50万以下</span></td>
-					<td><input type="checkbox"><span>50万以下</span></td>
-					<td><input type="checkbox"><span>50万以下</span></td>
-					<td><input type="checkbox"><span>50万以下</span></td>
-				</tr>
-				<tr>
-					<th>面积</th>
-					<td><input type="checkbox">50平以下</td>
-					<td><input type="checkbox">50-70平</td>
-					<td><input type="checkbox">70-90平</td>
-					<td><input type="checkbox">90-110平</td>
-					<td><input type="checkbox">110-130平</td>
-					<td><input type="checkbox">130-150平</td>
-				</tr>
-				<tr>
-					<th>房型</th>
-					<td><input type="checkbox">一室</td>
-					<td><input type="checkbox">一室</td>
-					<td><input type="checkbox">一室</td>
-					<td><input type="checkbox">一室</td>
-					<td><input type="checkbox">一室</td>
-				</tr>
-				<tr>
-					<th>用途</th>
+					<c:forEach items="${dictMap['售价']}" var="dict">
+						<td><input type="checkbox"><span>${dict.typeDescription}</span></td>
+					</c:forEach>
 				</tr>
 				<tr>
 					<th>标签</th>

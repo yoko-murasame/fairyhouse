@@ -280,6 +280,7 @@
             </div>
             <form action="/second/toSecondList" method="post">
                 <div class="input-group ">
+                    <input type="hidden" name="sortField" value="traffic">
                     <input type="text " name="keyword" class="form-control head-search" id="head-search-text"
                            placeholder="请输入区域、商圈或小区名开始找房">
                     <span class="input-group-btn ">

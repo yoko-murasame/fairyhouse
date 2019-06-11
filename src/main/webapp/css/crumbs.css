@@ -1,6 +1,6 @@
 #crumbs-table-container {
 	width: 80%;
-	min-width: 1250px;
+	min-width: 1100px;
 	background-color: #fbfbfb;
 	margin: 0 auto;
 	margin-top: 20px;
@@ -22,7 +22,7 @@
 
 #crumbs>tbody>tr>td,
 #crumbs>tfoot>tr>td,
-#crumbs>thead>tr>td,
+#crumbs>thead>tr>td
 {
 	border: 0px;
 }

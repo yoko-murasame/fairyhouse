@@ -11,6 +11,7 @@
 		<script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/js/bootstrap.js"></script>
 		<link rel="stylesheet" type="text/css" href="../../../js/gritter/css/jquery.gritter.css" />
 		<script type="text/javascript" src="../../../js/gritter/js/jquery.gritter.js"></script>
+		<script type="text/javascript" src="../../../js/common.js"></script>
 
 		<style>
 			.container {

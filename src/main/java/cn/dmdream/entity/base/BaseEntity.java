@@ -4,10 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @MappedSuperclass//表明这是父类，可以将属性映射到子类中使用JPA生成表
-public abstract class BaseEntity{
+public abstract class BaseEntity implements Serializable {
 
     @Getter @Setter
     @Id @GeneratedValue(strategy = GenerationType.AUTO)

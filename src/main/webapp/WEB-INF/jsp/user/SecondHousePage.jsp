@@ -18,7 +18,10 @@
 </head>
 <body>
 <div>
-    <jsp:include page="head.jsp"/>
+    <jsp:include page="personal-center-head.jsp"/>
+</div>
+<div>
+    <jsp:include page="crumbs.jsp"/>
 </div>
 <div>
     <jsp:include page="secondary-list.jsp"/>

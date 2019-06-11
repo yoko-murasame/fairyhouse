@@ -101,6 +101,7 @@ public class CommunityEntity extends BaseEntity {
     @ManyToMany(fetch = FetchType.LAZY,mappedBy = "commCollections")
     private Set<ClientEntity> clientEntities = new HashSet<>();
 
+
     @Override
     public String toString() {
         return "CommunityEntity{" +
