@@ -1,7 +1,9 @@
 package cn.dmdream.service.impl;
 
 import cn.dmdream.dao.HouseDao;
+import cn.dmdream.entity.AddressEntity;
 import cn.dmdream.entity.CommunityEntity;
+import cn.dmdream.entity.DictEntity;
 import cn.dmdream.entity.HouseEntity;
 import cn.dmdream.service.HouseService;
 import cn.dmdream.utils.EmptyUtils;
@@ -125,9 +127,48 @@ public class HouseServiceImpl implements HouseService {
     private Specification<HouseEntity> getWhereClause(final HouseEntity house) {
         return new Specification<HouseEntity>() {
             @Override
-            public Predicate toPredicate(Root<HouseEntity> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+            public Predicate toPredicate(Root<HouseEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 List<Predicate> predicates = new ArrayList<>();
-                return null;
+                //地址head查询
+                if (!EmptyUtils.isEmpty(house.getCommunityEntity().getAddressHead())) {
+                    Join<HouseEntity, CommunityEntity> entityJoin = root.join("communityEntity", JoinType.LEFT);
+                    Join<Object, AddressEntity> JoinThird = entityJoin.join("addressHead", JoinType.LEFT);
+                    predicates.add(cb.like(JoinThird.get("areaName").as(String.class), "%"+house.getCommunityEntity().getAddressHead().getAreaName()+"%"));
+                }
+                //售价范围
+                if (!EmptyUtils.isEmpty(house.getPriceType()) && !EmptyUtils.isEmpty(house.getPriceType().getId())) {
+                    Join<HouseEntity, DictEntity> join = root.join("priceType", JoinType.LEFT);
+                    predicates.add(cb.equal(join.get("id").as(Long.class), house.getPriceType().getId()));
+                }
+                //房屋类型
+                if (!EmptyUtils.isEmpty(house.getHouseType()) && !EmptyUtils.isEmpty(house.getHouseType().getId())) {
+                    Join<HouseEntity, DictEntity> join = root.join("houseType", JoinType.LEFT);
+                    predicates.add(cb.equal(join.get("id").as(Long.class), house.getHouseType().getId()));
+                }
+                //面积类型
+                if (!EmptyUtils.isEmpty(house.getAreaType()) && !EmptyUtils.isEmpty(house.getAreaType().getId())) {
+                    Join<HouseEntity, DictEntity> join = root.join("areaType", JoinType.LEFT);
+                    predicates.add(cb.equal(join.get("id").as(Long.class), house.getAreaType().getId()));
+                }
+                //楼层类型
+                if (!EmptyUtils.isEmpty(house.getFloorType()) && !EmptyUtils.isEmpty(house.getFloorType().getId())) {
+                    Join<HouseEntity, DictEntity> join = root.join("floorType", JoinType.LEFT);
+                    predicates.add(cb.equal(join.get("id").as(Long.class), house.getFloorType().getId()));
+                }
+                //房屋朝向
+                if (!EmptyUtils.isEmpty(house.getOrieType()) && !EmptyUtils.isEmpty(house.getOrieType().getId())) {
+                    Join<HouseEntity, DictEntity> join = root.join("orieType", JoinType.LEFT);
+                    predicates.add(cb.equal(join.get("id").as(Long.class), house.getOrieType().getId()));
+                }
+                //楼龄
+                if (!EmptyUtils.isEmpty(house.getAgeType()) && !EmptyUtils.isEmpty(house.getAgeType().getId())) {
+                    Join<HouseEntity, DictEntity> join = root.join("ageType", JoinType.LEFT);
+                    predicates.add(cb.equal(join.get("id").as(Long.class), house.getAgeType().getId()));
+                }
+
+
+                Predicate[] array = new Predicate[predicates.size()];
+                return query.where(predicates.toArray(array)).getRestriction();
             }
         };
     }

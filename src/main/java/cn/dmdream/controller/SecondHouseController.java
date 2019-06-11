@@ -7,13 +7,10 @@ import cn.dmdream.entity.HouseEntity;
 import cn.dmdream.service.CommunityService;
 import cn.dmdream.service.DictService;
 import cn.dmdream.service.HouseService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,11 +36,72 @@ public class SecondHouseController {
 
     //首页搜索进入二手房列表
     @RequestMapping("toSecondList")
+    public ModelAndView toSecondListPage(HouseEntity houseSearch, @RequestParam(value = "sortField", defaultValue = "createTime") String sortField, @RequestParam(defaultValue = "DESC") String order) {
+
+        //1.初始化houseDict,从Redis获取,Redis无从数据库获取
+        Map<String, List<DictEntity>> dictMap = null;
+        try {
+            dictMap = (Map<String, List<DictEntity>>) redisTemplate.opsForValue().get("houseDict");
+            if (dictMap == null) {
+                dictMap = this.handleSearchMap();
+                System.out.println("字典表从数据库查询的");
+                redisTemplate.opsForValue().set("houseDict",dictMap);
+            } else {
+                System.out.println("字典表从Redis查询的");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //System.out.println(dictMap);
+
+        //2.执行实体的条件封装
+
+        //System.out.println(houseSearch);
+
+        //2.1.地址关键字查询
+
+        //2.2.设置排序,三个循环防止判断攻击
+        Sort sort = null;
+        if (order.equalsIgnoreCase("DESC")) {
+            sort = Sort.by(Sort.Direction.DESC, sortField);
+        } else if (order.equalsIgnoreCase("ASC")) {
+            sort = Sort.by(Sort.Direction.ASC, sortField);
+        } else {
+            sort = Sort.by(Sort.Direction.DESC, sortField);
+        }
+        System.out.println(sortField);
+        System.out.println(order);
+
+        //3.执行动态查询
+        Page<HouseEntity> pageModel = houseService.findByHouseByPage(houseSearch, sort, 1, 10);
+        List<HouseEntity> list = pageModel.getContent();
+        for (HouseEntity h :
+                list) {
+            System.out.println(h);
+            System.out.println(h.getCommunityEntity().getAddressHead().getAreaName());
+        }
+
+        //4.返回视图模型
+        ModelAndView modelAndView = new ModelAndView("user/SecondHousePage");
+        //4.1.分页对象存入域
+        modelAndView.addObject("pageModel", pageModel);
+        //4.2.将house存入域
+        modelAndView.addObject("houseSearch", houseSearch);
+        //4.3.字典表存入域
+        modelAndView.addObject("dictMap", dictMap);
+        //4.4.搜索域存入域
+        modelAndView.addObject("sortField", sortField);
+
+        return modelAndView;
+    }
+
+/*    //首页搜索进入二手房列表
+    @RequestMapping("toSecondList")
     public ModelAndView toSecondListPage(String keyword, @RequestParam(value = "sortField", defaultValue = "createTime") String sortField, @RequestParam(defaultValue = "DESC") String order) {
         System.out.println(keyword);
 
 
-        //初始化houseDict
+        //1.初始化houseDict,从Redis获取,Redis无从数据库获取
         Map<String, List<DictEntity>> dictMap = null;
         try {
             dictMap = (Map<String, List<DictEntity>>) redisTemplate.opsForValue().get("houseDict");
@@ -59,14 +117,17 @@ public class SecondHouseController {
         }
         System.out.println(dictMap);
 
-        //实体查询部分
+        //2.执行实体的条件封装
+        HouseEntity house = new HouseEntity();//house对象
+
+        //2.1.地址关键字查询
         AddressEntity addressEntity = new AddressEntity();
-        //地址关键字查询
         addressEntity.setAreaName(keyword);
         CommunityEntity communityEntity = new CommunityEntity();
         communityEntity.setAddressHead(addressEntity);
+        house.setCommunityEntity(communityEntity);
+        //2.2.设置排序,三个循环防止判断攻击
         Sort sort = null;
-        //设置排序,三个循环防止判断攻击
         if (order.equalsIgnoreCase("DESC")) {
             sort = Sort.by(Sort.Direction.DESC, sortField);
         } else if (order.equalsIgnoreCase("ASC")) {
@@ -74,44 +135,33 @@ public class SecondHouseController {
         } else {
             sort = Sort.by(Sort.Direction.DESC, sortField);
         }
-
         System.out.println(sortField);
         System.out.println(order);
 
-        Page<CommunityEntity> pageModel = communityService.findByCommunityByPage(communityEntity, sort, 1, 10);
-
-        List<CommunityEntity> list = pageModel.getContent();
-        for (CommunityEntity comm :
+        //3.执行动态查询
+        Page<HouseEntity> pageModel = houseService.findByHouseByPage(house, sort, 1, 10);
+        List<HouseEntity> list = pageModel.getContent();
+        for (HouseEntity h :
                 list) {
-            System.out.println(comm);
-            System.out.println(comm.getAddressHead().getAreaName());
-            System.out.println("==========");
-            Set<HouseEntity> houseEntities = comm.getHouseEntities();
-            for (HouseEntity houseEntity : houseEntities) {
-                System.out.println("------------");
-                System.out.println(houseEntity);
-                System.out.println("------------");
-                System.out.println(houseEntity.getShowPics());
-            }
-            System.out.println("==========");
+            System.out.println(h);
+            System.out.println(h.getCommunityEntity().getAddressHead().getAreaName());
         }
+
+        //4.返回视图模型
         ModelAndView modelAndView = new ModelAndView("user/SecondHousePage");
-        //分页对象存入域
+        //4.1.分页对象存入域
         modelAndView.addObject("pageModel", pageModel);
-        //将关键字存入域
+        //4.2.将关键字存入域
         modelAndView.addObject("keyword", keyword);
-        //字典表存入域
+        //4.3.字典表存入域
         modelAndView.addObject("dictMap", dictMap);
 
         return modelAndView;
-    }
+    }*/
 
     //动态导航数据查询
     public Map<String, List<DictEntity>> handleSearchMap() {
         Map<String, List<DictEntity>> map = new HashMap<String, List<DictEntity>>();
-
-
-
         //楼层
         List<DictEntity> loucen = dictService.findAllByTypeNum(100001);
         map.put("楼层", loucen);

@@ -151,33 +151,47 @@
 		<div class="containerr">
 			<div>
 				<ul class="list-inline" >
+					<%--添加隐藏表单将a标签转换成form--%>
+					<form action="/second/toSecondList" method="post" id="a-form">
+						<input type="hidden" name="communityEntity.addressHead.areaName" value="${houseSearch.communityEntity.addressHead.areaName}">
+						<input type="hidden" name="priceType.id" value="${houseSearch.priceType.id}">
+						<input type="hidden" name="houseType.id" value="${houseSearch.houseType.id}">
+						<input type="hidden" name="areaType.id" value="${houseSearch.areaType.id}">
+						<input type="hidden" name="floorType.id" value="${houseSearch.floorType.id}">
+						<input type="hidden" name="orieType.id" value="${houseSearch.orieType.id}">
+						<input type="hidden" name="ageType.id" value="${houseSearch.ageType.id}">
+						<input type="hidden" name="sortField">
+					</form>
+					<script>
+						function atoForm(obj) {
+							var field = $(obj).attr("data-field");
+                            $("#a-form").children("input[name='sortField']").val(field);
+                            console.log($("#a-form").children("input[name='sortField']").val())
+                            $("#a-form").submit();
+                            return false;
+						}
+					</script>
 					<li id="fist_li" class="li">
-						<a class="sencondary-a" href="/second/toSecondList?keyword=${keyword}" id="fist_a">默认排序</a>
+						<a class="sencondary-a" href="#" onclick="atoForm(this)" id="fist_a">默认排序</a>
 					</li>
 					<li class="li">
-						<a class="sencondary-a" href="/second/toSecondList?keyword=${keyword}&sortField=createTime&order=DESC">最新</a>
+						<a class="sencondary-a" href="#" data-field="createTime" onclick="atoForm(this)">最新</a>
 					</li>
 					<li class="li">
-						<a class="sencondary-a" href="/second/toSecondList?keyword=${keyword}&sortField=houseEntities.price&order=DESC">价格</a>
+						<a class="sencondary-a" data-field="price" href="#" onclick="atoForm(this)">价格</a>
 					</li>
 					<li class="li">
-						<a class="sencondary-a" href="/second/toSecondList?keyword=${keyword}&sortField=houseEntities.traffic">带看较多</a>
+						<a class="sencondary-a" data-field="traffic" href="#" onclick="atoForm(this)">访问量最多</a>
 					</li>
 				</ul>
 			</div>
 			<hr class="hr" />
 			<div class="fist_head">
-				<h4 class="total_house">共找到<span> 3862 </span>套杭州二手房</h4>
+				<h4 class="total_house">共找到<span> ${pageModel.totalElements} </span>套杭州二手房</h4>
 			</div>
 			<div id="contentt">
-
-				<c:forEach items="${pageModel.content}" var="comm">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					${comm.title} 地址: ${comm.addressHead.areaName} ${comm.address}
-
 					<ul>
-						<c:forEach items="${comm.houseEntities}" var="house">
-
+						<c:forEach items="${pageModel.content}" var="house">
 							<li class="house_li">
 								<a href="/second/toInfoPage?id=${house.id}" target="_blank">
 									<%--没有图片时默认显示--%>
@@ -197,7 +211,8 @@
 									<br />
 									<div class="address">
 										<div class="houseInfo">
-											<a href="#" target="_blank"><span><img class="icon" src="../../../imgs/house.png">${comm.title}</span> </a>
+											<%--这里需要跳转公寓列表--%>
+											<a href="#" target="_blank"><span><img class="icon" src="../../../imgs/house.png">${house.communityEntity.title}</span> </a>
 											<span>
 									| ${house.houseType.typeDescription} | ${house.area} | ${house.orieType.typeDescription} | ${house.floor}楼 |  ${house.floorType.typeDescription}
 									</span>
@@ -205,9 +220,9 @@
 									</div>
 									<div class="flood">
 										<div class="positionInfo">
-											<span class="positionIcon"><img class="icon" src="../../../imgs/position.png">${house.floorType.typeDescription}(第${house.floor}层)${comm.age}年建${comm.type}-</span>
-											<%--这里需要跳转公寓列表--%>
-											<a href="#" target="_blank"><span>${comm.addressHead.areaName}</span></a>
+											<span class="positionIcon"><img class="icon" src="../../../imgs/position.png">${house.floorType.typeDescription}(第${house.floor}层)${house.communityEntity.age}年建${house.communityEntity.type}-</span>
+											<%--地址--%>
+											<a href="#" target="_blank"><span>${house.communityEntity.addressHead.areaName} ${house.communityEntity.address} ${house.address}</span></a>
 										</div>
 									</div>
 									<div class="followInfo">
@@ -227,7 +242,7 @@
 										</div>
 									</div>
 									<div class="listButtonContainer">
-										<span><Button class="btn" onclick="showGritter('消息','关注成功!')">关注</button></span>
+										<span><Button class="btn" onclick= "showGritter('消息','关注成功!')">关注</button></span>
 										<span><Button class="btn" onclick="showGritter('消息','成功加入对比!')">加入对比</button></span>
 									</div>
 								</div>
@@ -236,8 +251,6 @@
 						</c:forEach>
 
 					</ul>
-
-				</c:forEach>
 
 			</div>
 		</div>

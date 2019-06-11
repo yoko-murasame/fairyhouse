@@ -105,7 +105,6 @@ public class HouseEntity extends BaseEntity {
     private List<HistoryEntity> histories = new ArrayList<HistoryEntity>();
 
     @Override
-
     public String toString() {
         return "HouseEntity{" +
                 "title='" + title + '\'' +

@@ -3,6 +3,7 @@ package cn.dmdream.Service;
 import cn.dmdream.dao.AddressDao;
 import cn.dmdream.dao.ClientDao;
 import cn.dmdream.dao.CommunityDao;
+import cn.dmdream.entity.AddressEntity;
 import cn.dmdream.entity.ClientEntity;
 import cn.dmdream.entity.CommunityEntity;
 import cn.dmdream.entity.HouseEntity;
@@ -11,9 +12,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Set;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -56,5 +61,44 @@ public class TestHouseService {
         //保存
         HouseEntity save = houseService.save(house);
         System.out.println(save);
+    }
+
+    @Test
+    public void findTest() {
+        String keyword = "西湖";
+        String order = "DESC";
+        String sortField = "createTime";
+        //实体查询部分
+        AddressEntity addressEntity = new AddressEntity();
+        //地址关键字查询
+        addressEntity.setAreaName(keyword);
+        CommunityEntity communityEntity = new CommunityEntity();
+        communityEntity.setAddressHead(addressEntity);
+        //house对象
+        HouseEntity house = new HouseEntity();
+        house.setCommunityEntity(communityEntity);
+
+        Sort sort = null;
+        //设置排序,三个循环防止判断攻击
+        if (order.equalsIgnoreCase("DESC")) {
+            sort = Sort.by(Sort.Direction.DESC, sortField);
+        } else if (order.equalsIgnoreCase("ASC")) {
+            sort = Sort.by(Sort.Direction.ASC, sortField);
+        } else {
+            sort = Sort.by(Sort.Direction.DESC, sortField);
+        }
+
+        System.out.println(sortField);
+        System.out.println(order);
+
+        Page<HouseEntity> pageModel = houseService.findByHouseByPage(house, sort, 1, 10);
+
+
+        List<HouseEntity> list = pageModel.getContent();
+        for (HouseEntity h :
+                list) {
+            System.out.println(h);
+            System.out.println(h.getCommunityEntity().getAddressHead().getAreaName());
+        }
     }
 }
