@@ -1,6 +1,7 @@
 package cn.dmdream.entity;
 
 import cn.dmdream.entity.base.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -56,6 +57,7 @@ public class CommunityEntity extends BaseEntity {
     private Integer houseCounts;       //房屋总数（例：6000户）
 
     //一对多，被维护方
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "communityEntity")
     private Set<StoreEntity> nearbyStoreEntities = new HashSet<>();  //附近门店（例：荣丰小区一店/宣武区广安门外大街305号）
 
@@ -71,6 +73,7 @@ public class CommunityEntity extends BaseEntity {
     private Set<AgentEntity> agentEntitySet = new HashSet<>();
 
     //小区的评价 一对多 全部级联关系
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "communityEntity",fetch = FetchType.LAZY)
     private Set<EvaluationEntity> evaluations = new HashSet<>();
 
@@ -96,8 +99,8 @@ public class CommunityEntity extends BaseEntity {
     @Column
     private Long traffic;           //访问量
 
-
     //收藏客户集合,多对多,不维护关系,无级联操作
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,mappedBy = "commCollections")
     private Set<ClientEntity> clientEntities = new HashSet<>();
 

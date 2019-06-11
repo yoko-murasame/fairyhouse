@@ -1,6 +1,7 @@
 package cn.dmdream.entity;
 
 import cn.dmdream.entity.base.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,10 +45,12 @@ public class HouseEntity extends BaseEntity {
     private Integer age;            //房龄
 
     //经纪人 多对一 多的一方 维护外键
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     private AgentEntity agentEntity;
 
     //所在小区 多对一
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "communityEntity", columnDefinition = "int comment '所属的小区'")
     private CommunityEntity communityEntity;
@@ -91,10 +94,12 @@ public class HouseEntity extends BaseEntity {
     private Long traffic;//访问量
 
     //房子关注者集合,多对多,被维护方,无级联操作
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "houseEntityCollections")
     private Set<ClientEntity> clientEntities = new HashSet<>();
 
     //房子所属人(拥有者),多对一,维护方,不可为空
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch =
             FetchType.EAGER, optional = false)
     @JoinColumn(nullable = false, columnDefinition = "int comment '房子的拥有者'")

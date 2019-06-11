@@ -1,6 +1,7 @@
 package cn.dmdream.entity;
 
 import cn.dmdream.entity.base.BaseUserEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,10 +44,12 @@ public class AgentEntity extends BaseUserEntity {
     private DictEntity major;
 
     //负责小区:翠微东里 翠微北里 颐源居小区 多对多,维护方,级联修改
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,cascade = {CascadeType.MERGE,CascadeType.REFRESH,CascadeType.DETACH})
     private Set<CommunityEntity> communities = new HashSet<>();
 
     //负责房源 一对多 被维护方
+    @JsonIgnore
     @OneToMany(cascade = {CascadeType.MERGE,CascadeType.REFRESH,CascadeType.DETACH},fetch = FetchType.LAZY,mappedBy = "agentEntity")
     private Set<HouseEntity> houses = new HashSet<>();
 

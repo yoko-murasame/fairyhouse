@@ -13,6 +13,7 @@
 <input type="button" id="upload" value="upload">
 <div id="processImg"></div>
 <img id="image" src="#" alt="">
+<img src="/utils/code">${veriCode}
 
 </body>
 <script type="text/javascript">

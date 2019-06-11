@@ -26,7 +26,7 @@ public class QiniuUpload {
     @RequestMapping("/file")
     public ModelAndView toFilePage() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("jsp/fileUpload.jsp");
+        modelAndView.setViewName("fileUpload");
         //modelAndView.setViewName("jsp/helloworld.jsp");
         return modelAndView;
     }
