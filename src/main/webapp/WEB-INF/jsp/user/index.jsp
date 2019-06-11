@@ -6,12 +6,17 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>首页</title>
-    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../../css/bootstrap.css"/>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../js/gritter/css/jquery.gritter.css"/>
+    <script type="text/javascript" src="../../../js/gritter/js/jquery.gritter.js"></script>
+    <script type="text/javascript" src="../../../js/common.js"></script>
     <link rel="stylesheet" type="text/css" href="../../../css/right-navbar.css"/>
     <style type="text/css">
         body,
         a {
+            background-color: #ccc;
             color: white !important;
         }
 
@@ -186,10 +191,10 @@
 <div class="fixed-navbar">
     <ul class="nav" id="right-nav">
         <li>
-            <a href="#"><img class="icon" src="../../../imgs/collection.png"/> </a>
+            <a href="#"><img class="icon" src="../../../imgs/sale.png"/> </a>
         </li>
         <li>
-            <a href="#"><img class="icon" src="../../../imgs/house.png"/></a>
+            <a href="#"><img class="icon" src="../../../imgs/list.png"/></a>
         </li>
         <li>
             <a href="#"><img class="icon" src="../../../imgs/sale.png"/></a>
@@ -207,12 +212,12 @@
                     <div class="container-fluid">
                         <div>
                             <ul class="nav navbar-nav">
-                                <li>
+                              <%--  <li>
                                     <a href="#">登录</a>
                                 </li>
                                 <li>
                                     <a href="#">注册</a>
-                                </li>
+                                </li>--%>
                             </ul>
                         </div>
                     </div>
@@ -236,7 +241,7 @@
                     <nav id="index-nav" class="nav navbar-right navbar-transparent">
                         <ul class="nav navbar-nav">
                             <li>
-                                <a href="#">二手房</a>
+                                <a href="/second/toSecondList">二手房</a>
                             </li>
                             <li>
                                 <a href="#">新房</a>
@@ -281,7 +286,8 @@
             <form action="/second/toSecondList" method="post">
                 <div class="input-group">
                     <input type="hidden" name="sortField" value="traffic">
-                    <input type="text" name="communityEntity.addressHead.areaName" class="form-control head-search" id="head-search-text"
+                    <input type="text" name="communityEntity.addressHead.areaName" class="form-control head-search"
+                           id="head-search-text"
                            placeholder="请输入区域、商圈或小区名开始找房">
                     <span class="input-group-btn ">
                             <input type="submit" class="btn btn-success head-search" id="head-search-btn" value="开始找房">
@@ -291,7 +297,14 @@
         </div>
     </div>
     <div class="site-body">
-        <div class="map-find">
+        <script>
+            $(function () {
+                $("#tomap").click(function () {
+                    window.location.href = "${pageContext.request.contextPath}/map/jsdemo";
+                })
+            })
+        </script>
+        <div class="map-find" id="tomap">
             <img src="../../../imgs/map-find.png"/>
             <div class="intro-map">
                 地图找房
@@ -310,8 +323,12 @@
             </div>
         </div>
     </div>
+    <div>
+        <jsp:include page="commRecommend.jsp"/>
+        <jsp:include page="newHouseRecommend.jsp"/>
+    </div>
 </div>
-<jsp:include page="footer.jsp"/>
+<%--<jsp:include page="footer.jsp"/>--%>
 <script src="../../../js/jquery-3.4.0.js" type="text/javascript " charset="utf-8 "></script>
 <script type="text/javascript " src="../../../js/bootstrap.js"></script>
 <script src="../../../js/common.js" type="text/javascript" charset="utf-8"></script>

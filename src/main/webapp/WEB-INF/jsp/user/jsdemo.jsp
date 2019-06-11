@@ -78,9 +78,10 @@
 				height: 100%;
 				padding: 10px 3px;
 				float: left;
+				cursor: pointer;
 			}
 			
-			.map-community-img>img {
+			.map-community-img img {
 				height: 100%;
 				width: 100%;
 			}
@@ -141,6 +142,10 @@
 				text-overflow: ellipsis;
 				white-space: nowrap;
 			}
+			
+			.community-info-back {
+				float: right;
+			}
 		</style>
 		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=9rkXTKt9Yjooe5uGYWPG7tdaGZ9OLAl3&s1"></script>
 		<script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
@@ -181,7 +186,7 @@
 				var map = new BMap.Map("allmap");
 				//初始化地图
 				function myFun(result) {
-                    console.log(result);
+					console.log(result);
 					var cityName = result.name;
 					map.centerAndZoom(cityName, 12);
 				}
@@ -206,7 +211,7 @@
 					dw(map);
 					$.ajax({
 						type: 'post',
-						url: "/getCommunities",
+						url: "/map/getCommunities",
 						data: address,
 						async: false,
 						dataType: 'json',
@@ -214,11 +219,11 @@
 							var data = back.data;
 							$("#allmap").removeClass("map-show");
 							$("#allmap").addClass("map-hide");
-                            $("#list-container").removeClass("list-container-hide");
+							$("#list-container").removeClass("list-container-hide");
 
-							console.log(data);
-							console.log(data.length);
-							console.log($(".map-community-info-counts-number"));
+							//							console.log(data);
+							//							console.log(data.length);
+							//							console.log($(".map-community-info-counts-number"));
 							$(".map-community-info-counts-number")[0].innerHTML = data.length;
 							var str = "";
 							for(var i in data) {
@@ -234,7 +239,44 @@
 								else
 									str += "<p><span><img src='../../../imgs/people.png'  class='map-community-info-icon'></span>" + "张三" + "<span class='map-community-info-avgprice'>" + data[i].avgPrice + "元/m²</span></p></div></li>";
 							}
+							$("#map-list-ul").empty();
 							$("#map-list-ul").append(str);
+
+							$(".map-community-img").click(function() {
+								var index = $(this).parent().index();
+								var infoStr = "<span class='map-community-info-counts-number'>" + data[index].title + "</span>共有<span class='map-community-info-counts-number'>" + data[index].houseEntities.length + "</span>个房源<span class='community-info-back'><img src='../../../imgs/back.png'/></span>";
+								$(".map-community-info-counts").empty();
+								$(".map-community-info-counts").append(infoStr);
+
+								//								console.log(data);
+								var houses = data[index].houseEntities;
+								//								console.log(data[index]);
+								//								console.log(houses[0]);
+								//								console.log(data[index]);
+								var houseStr = "";
+								for(var i in houses) {
+									if(houses[i].showPics.length == 0)
+										houseStr += "<li class='map-community-one'><div class='map-community-img'><a href='/second/toInfoPage?id="+houses[i].id+"'><img src='../../../imgs/house1.jpg' /></a></div>";
+									else
+										houseStr += "<li class='map-community-one'><div class='map-community-img'><img src=" + houses[i].showPics[0].picUrl + " /></div>";
+									houseStr += "<div class = 'map-community-info'><p class = 'map-community-info-title' > " + houses[i].title + "</p>";
+									houseStr += "<p><span><img src='../../../imgs/house2.png'  class='map-community-info-icon'></span>" + houses[i].address + "</p>";
+									houseStr += "<p><span><img src='../../../imgs/area.png'  class='map-community-info-icon'></span>" + houses[i].area + "m²</p>";
+									//									if(typeof houses[i].agentEntitySet[0] != "undefined")
+									//										houseStr += "<p><span><img src='../../../imgs/people.png'  class='map-community-info-icon'></span>" + data[index].agentEntitySet[0].username + "<span class='map-community-info-avgprice'>" + data[i].avgPrice + "元/m²</span></p></div></li>";
+									//									else
+									houseStr += "<p><span><img src='../../../imgs/people.png'  class='map-community-info-icon'></span>" + "张三" + "<span class='map-community-info-avgprice'>" + houses[i].perPrice + "元/m²</span></p></div></li>";
+								}
+								$("#map-list-ul").empty();
+								$("#map-list-ul").append(houseStr);
+
+								$(".community-info-back").click(function() {
+									$("#confirm").trigger('click');
+									var temp = "共有<span class='map-community-info-counts-number'>" + data.length + "</span>个小区可供选择";
+									$(".map-community-info-counts").empty();
+									$(".map-community-info-counts").append(temp);
+								});
+							});
 
 						},
 						error: function() {
@@ -259,7 +301,7 @@
 				//				console.log(point);
 				local.search('小区', '房地产', '住宅区');
 				local.setMarkersSetCallback(function(pois) {
-					console.log(pois);
+					//					console.log(pois);
 					//清除所有覆盖物后，在叠加第一个点
 					//					map.centerAndZoom(pois[0], 15);
 					map.clearOverlays();

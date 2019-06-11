@@ -2,7 +2,6 @@
 	width: 100%;
 	min-height: 200px;
 	min-width: 1400px;
-	padding: 0px 100px;
 }
 
 #recommmend-theme {
@@ -64,11 +63,12 @@
 
 .intro-click {
 	padding: 25px!important;
+	height: 200px;
 }
 
 .intro-img {
 	width: 100%;
-	height: 100%;
+	height: 300px;
 	box-sizing: border-box;
 	margin-bottom: 20px;
 	border-radius: 5px;
@@ -80,20 +80,21 @@
 	font-size: 24px;
 	height: 24px;
 	cursor: pointer;
+	color:#333!important;
 }
 
 .position:hover {
 	color: #aaa;
 }
 
-.tips>span:first {
+.tips>span {
 	color: #8080a1;
 }
 
 .tips-price {
 	float: right;
 	font-size: 21px;
-	color: #fa576b;
+	color: #fa576b!important;
 }
 
 .intro-img {

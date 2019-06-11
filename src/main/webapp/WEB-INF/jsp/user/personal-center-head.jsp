@@ -1,5 +1,6 @@
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -25,7 +26,7 @@
 								<img src="../../../imgs/logo.png" id="site-logo-img" />
 							</li>
 							<li>
-								<a href="index">玲珑之家</a>
+								<a href="/">玲珑之家</a>
 							</li>
 						</ul>
 					</nav>
@@ -33,12 +34,23 @@
 				<div>
 					<nav id="site-account" class="navbar-right">
 						<ul class="nav navbar-nav site-navbar">
-							<li>
-								<a href="#">张三</a>
-							</li>
-							<li>
-								<a href="#">退出</a>
-							</li>
+							<c:if test="${empty user}">
+								<li>
+									<%--<a href="#">一键登录</a>--%>
+									<!-- 按钮触发模态框 -->
+									<button class="btn" data-toggle="modal" data-target="#myModal" style="margin:11px 10px ">
+										一键登录
+									</button>
+								</li>
+							</c:if>
+							<c:if test="${not empty user}">
+								<li>
+									<a href="/user/latestInfo">您好:${user.phone}</a>
+								</li>
+								<li>
+									<a href="/user/logout">退出</a>
+								</li>
+							</c:if>
 						</ul>
 					</nav>
 				</div>
@@ -46,7 +58,7 @@
 					<nav id="site-nav" class="navbar-right">
 						<ul class="nav navbar-nav site-navbar">
 							<li>
-								<a href="#">二手房</a>
+								<a href="/second/toSecondList">二手房</a>
 							</li>
 							<li>
 								<a href="#">新房</a>
@@ -65,6 +77,9 @@
 				</div>
 			</div>
 		</div>
+
+		<jsp:include page="login-reg.jsp"/>
+
 	</body>
 
 </html>

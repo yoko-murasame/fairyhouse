@@ -2,6 +2,7 @@ package cn.dmdream.controller;
 
 import cn.dmdream.entity.AddressEntity;
 import cn.dmdream.entity.CommunityEntity;
+import cn.dmdream.entity.HouseEntity;
 import cn.dmdream.service.AddressService;
 import cn.dmdream.service.CommunityService;
 import cn.dmdream.service.HouseService;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
+@RequestMapping("/map")
 public class MapController {
 
     @Autowired
@@ -41,7 +43,7 @@ public class MapController {
     }
 
     @PostMapping("/getCommunities")
-    public String toSecondListPage(String county) {
+    public String getCommunities(String county) {
         System.out.println(county);
         AddressEntity addressEntity = new AddressEntity();
         addressEntity.setAreaName(county);

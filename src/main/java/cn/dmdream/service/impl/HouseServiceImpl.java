@@ -130,7 +130,7 @@ public class HouseServiceImpl implements HouseService {
             public Predicate toPredicate(Root<HouseEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 List<Predicate> predicates = new ArrayList<>();
                 //地址head查询
-                if (!EmptyUtils.isEmpty(house.getCommunityEntity().getAddressHead())) {
+                if (!EmptyUtils.isEmpty(house.getCommunityEntity())&&!EmptyUtils.isEmpty(house.getCommunityEntity().getAddressHead()) && !EmptyUtils.isEmpty(house.getCommunityEntity().getAddressHead().getAreaName())) {
                     Join<HouseEntity, CommunityEntity> entityJoin = root.join("communityEntity", JoinType.LEFT);
                     Join<Object, AddressEntity> JoinThird = entityJoin.join("addressHead", JoinType.LEFT);
                     predicates.add(cb.like(JoinThird.get("areaName").as(String.class), "%"+house.getCommunityEntity().getAddressHead().getAreaName()+"%"));

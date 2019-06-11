@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -205,10 +209,22 @@ public class SecondHouseController {
     //点击二手房列表到房源信息
     @RequestMapping("toInfoPage")
     public ModelAndView toInfoPage(Long id) {
-        HouseEntity house = houseService.findById(id);
-        ModelAndView mav = new ModelAndView("房源详情页.");
-        if (house != null) {
-            mav.addObject("house", house);
+        DateFormat sdf =new SimpleDateFormat("yyyy-MM-dd" );
+        HouseEntity houseEntity = houseService.findById(id);
+        System.out.println(houseEntity);
+        int price=houseEntity.getPrice().intValue();
+        String creatTime= houseEntity.getCreateTime().toString().split(" ")[0];
+        houseEntity.setPrice(new BigDecimal(price));
+        try {
+            houseEntity.setCreateTime(sdf.parse(houseEntity.getCreateTime().toString()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        ModelAndView mav = new ModelAndView("user/second_hand_house");
+        if (houseEntity != null) {
+            mav.addObject("house", houseEntity);
+            mav.addObject("createTime",creatTime);
         }
         return mav;
     }
