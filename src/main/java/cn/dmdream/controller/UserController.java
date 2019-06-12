@@ -9,6 +9,7 @@ import cn.dmdream.utils.SmsUtilsTencent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -126,16 +127,15 @@ public class UserController {
     }
 
     @RequestMapping("user/personalAgent")
-    public ModelAndView toPersonalAgent() {
-//        AgentEntity test = agentService.findById(1l);
+    public ModelAndView toPersonalAgent(Model model) {
         AgentEntity test = new AgentEntity();
-        test.setUsername("Mr.Shao");
+        test.setUsername("yoko");
+        //创建排序对象，使用字段“score”降序
         Sort sort = Sort.by(Sort.Direction.DESC, "score");
-        Page<AgentEntity> pageModel = agentService.findAllByPage(test, sort, 1, 5);
-        List<AgentEntity> list = pageModel.getContent();
+        Page<AgentEntity> pageModel = agentService.findAllByPage(test, sort, 1, 5);//查询
+        List<AgentEntity> list = pageModel.getContent();//获取实体列表
         list.forEach(System.out::println);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("user/personal-center-agent");
-        return modelAndView;
+        model.addAttribute("list", list);//添加到域
+        return new ModelAndView("user/personal-center-agent");//转发
     }
 }

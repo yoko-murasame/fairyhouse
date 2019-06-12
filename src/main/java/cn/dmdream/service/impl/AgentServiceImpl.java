@@ -92,11 +92,10 @@ public class AgentServiceImpl implements AgentService {
     @Override
     public Page<AgentEntity> findAllByPage(AgentEntity agent,Sort sort, Integer page, Integer pageSize) {
 
-        //1.创建排序
-
+        //1.创建排序，交给Controller创建了
         //2.创建分页对象,page是从0开始
         PageRequest pageRequest = PageRequest.of(page - 1, pageSize, sort);
-        //3.查询<1.条件对象:下面的方法已经封装好 2.page对象:里面有分页信息和排序信息> 返回pageBean
+        //3.查询<1.条件对象:下面的方法getWhereClause已经封装好 2.page对象:里面有分页信息和排序信息> 返回pageBean
         Page<AgentEntity> pageModel = agentDao.findAll(getWhereClause(agent), pageRequest);
         return pageModel;
     }
@@ -112,6 +111,8 @@ public class AgentServiceImpl implements AgentService {
                 //1.创建条件列表
                 List<Predicate> predicates = new ArrayList<Predicate>();
                 //2.遍历对象依次增加条件
+
+                //-----普通字段开始-----
                 //2.1.按评分score条件
                 if (!EmptyUtils.isEmpty(searchAgent.getScore())) {
                     predicates.add(cb.equal(root.get("score").as(Double.class), searchAgent.getScore()));
@@ -128,15 +129,19 @@ public class AgentServiceImpl implements AgentService {
                 if (!EmptyUtils.isEmpty(searchAgent.getRealname())) {
                     predicates.add(cb.like(root.get("realname").as(String.class), "%"+searchAgent.getRealname()+"%"));
                 }
+                //-----普通字段结束-----
 
+                //-----一对一的实体属性开始-----
                 //2.5.按级别grade
                 if (!EmptyUtils.isEmpty(searchAgent.getGrade())) {
                     Join<AgentEntity,DictEntity> entityJoin = root.join("grade",JoinType.LEFT);
+                    //方式一：做好左外连接后，根据连接实体中的id（实际上是DictEntity的id）获取表达式
                     predicates.add(cb.equal(entityJoin.get("id").as(Long.class), searchAgent.getGrade().getId()));
                 }
                 //2.6.按能力值abilityTag
                 if (!EmptyUtils.isEmpty(searchAgent.getAbilityTag())) {
                     Join<AgentEntity,DictEntity> entityJoin = root.join("abilityTag",JoinType.LEFT);
+                    //方式二：做好左外连接后，直接根据连接实体的类获取表达式，后面几个字段均用此方式
                     predicates.add(cb.equal(root.get("abilityTag").as(DictEntity.class), searchAgent.getAbilityTag()
                             .getId()));
                 }
@@ -151,6 +156,8 @@ public class AgentServiceImpl implements AgentService {
                     Join<AgentEntity,DictEntity> entityJoin = root.join("major",JoinType.LEFT);
                     predicates.add(cb.equal(root.get("major").as(DictEntity.class), searchAgent.getMajor().getId()));
                 }
+                //-----一对一的实体属性结束-----
+
                 //3.将条件转化返回
                 Predicate[] predicateArray = new Predicate[predicates.size()];
                 return query.where(predicates.toArray(predicateArray)).getRestriction();

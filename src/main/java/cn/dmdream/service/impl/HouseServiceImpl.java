@@ -94,6 +94,14 @@ public class HouseServiceImpl implements HouseService {
         }
     }
 
+    /**
+     * 查询方法
+     * @param houseEntity
+     * @param sort
+     * @param page
+     * @param pageSize
+     * @return
+     */
     @Override
     public Page<HouseEntity> findByHouseByPage(HouseEntity houseEntity, Sort sort, Integer page, Integer pageSize) {
 
@@ -130,6 +138,7 @@ public class HouseServiceImpl implements HouseService {
             public Predicate toPredicate(Root<HouseEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 List<Predicate> predicates = new ArrayList<>();
                 //地址head查询
+                //三个判空操作
                 if (!EmptyUtils.isEmpty(house.getCommunityEntity())&&!EmptyUtils.isEmpty(house.getCommunityEntity().getAddressHead()) && !EmptyUtils.isEmpty(house.getCommunityEntity().getAddressHead().getAreaName())) {
                     Join<HouseEntity, CommunityEntity> entityJoin = root.join("communityEntity", JoinType.LEFT);
                     Join<Object, AddressEntity> JoinThird = entityJoin.join("addressHead", JoinType.LEFT);
@@ -165,7 +174,6 @@ public class HouseServiceImpl implements HouseService {
                     Join<HouseEntity, DictEntity> join = root.join("ageType", JoinType.LEFT);
                     predicates.add(cb.equal(join.get("id").as(Long.class), house.getAgeType().getId()));
                 }
-
 
                 Predicate[] array = new Predicate[predicates.size()];
                 return query.where(predicates.toArray(array)).getRestriction();
