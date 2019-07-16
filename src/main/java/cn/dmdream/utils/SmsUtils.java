@@ -17,8 +17,8 @@ import java.util.Map;
 public class SmsUtils {
 
     private final static String smsHost = "sms.qiniuapi.com";
-    private final static String accessKey = "zrPgkmztAVlJWWfh_j8xtKNRGu_18a1mx6O59Swy";
-    private final static String secretKey = "GNOSIuF8bPFA5v3Dx6XoooxZtXut2FeZHQxoj9hA";
+    private final static String accessKey = "不告诉你";
+    private final static String secretKey = "不告诉你";
     private final static String templateId = "";
 
     /**

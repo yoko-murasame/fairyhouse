@@ -10,19 +10,19 @@ import java.io.IOException;
 public class SmsUtilsTencent {
 
     // 短信应用 SDK AppID
-    private static final int appid = 1400219385; // SDK AppID 以1400开头
+    private static final int appid = 不告诉你; // SDK AppID 以1400开头
 
     // 短信应用 SDK AppKey
-    private static final String appkey = "5b2f297674e121377211c309eacdc7c8";
+    private static final String appkey = "不告诉你";
 
     // 注册短信模板 ID，需要在短信应用中申请
-    private static final int templateIdRegister = 348706; // NOTE: 这里的模板 ID`7839`只是示例，真实的模板 ID 需要在短信控制台中申请
+    private static final int templateIdRegister = 不告诉你; // NOTE: 这里的模板 ID`7839`只是示例，真实的模板 ID 需要在短信控制台中申请
 
     // 登录短信模板
-    private static final int templateIdLogin = 348705; // NOTE: 这里的模板 ID`7839`只是示例，真实的模板 ID 需要在短信控制台中申请
+    private static final int templateIdLogin = 不告诉你; // NOTE: 这里的模板 ID`7839`只是示例，真实的模板 ID 需要在短信控制台中申请
 
     // 签名
-    private static final String smsSign = "dmdreamcn"; // NOTE: 签名参数使用的是`签名内容`，而不是`签名ID`。这里的签名"腾讯云"只是示例，真实的签名需要在短信控制台申请
+    private static final String smsSign = "不告诉你"; // NOTE: 签名参数使用的是`签名内容`，而不是`签名ID`。这里的签名"腾讯云"只是示例，真实的签名需要在短信控制台申请
 
     /**
      * 测试
