@@ -1,7 +1,7 @@
 [TOC]
 
 # 玲珑之家——架构设计
-
+在线演示视频：http://img.dmdream.cn/fairyhouse.mp4
 ### 一、统一环境
 
 * 开发IDE尽量使用IDEA
